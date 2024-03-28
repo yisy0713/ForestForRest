@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5632281357948563123}
   - component: {fileID: 5632281357947595891}
   - component: {fileID: 7504647920466521597}
-  - component: {fileID: 5129092337473796639}
   - component: {fileID: 6630739238290426400}
+  - component: {fileID: 3986601045809792127}
   m_Layer: 10
   m_Name: apple
   m_TagString: Item
@@ -99,20 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 62dcbe33051a4784a8cee4d2f8e65983, type: 2}
---- !u!136 &5129092337473796639
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5632281357949858483}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.18218887
-  m_Height: 0.37079924
-  m_Direction: 1
-  m_Center: {x: 0.00000014156103, y: -0.000000007450581, z: 0.000000014901161}
 --- !u!54 &6630739238290426400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +115,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3986601045809792127
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632281357949858483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34047562, y: 0.37079924, z: 0.36437774}
+  m_Center: {x: 0.00000014156103, y: -0.000000007450581, z: 0.000000014901161}

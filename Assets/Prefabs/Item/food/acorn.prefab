@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 655289262674940294}
   - component: {fileID: 655289262673974086}
   - component: {fileID: 655289262675743143}
-  - component: {fileID: 655289262675743136}
   - component: {fileID: 5896138192764515392}
+  - component: {fileID: 6575787920490739161}
   m_Layer: 10
   m_Name: acorn
   m_TagString: Item
@@ -99,20 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: d35785f731b792546bb28d1a760b0a9f, type: 2}
---- !u!136 &655289262675743136
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655289262675971462}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.13104378
-  m_Height: 0.38635826
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5896138192764515392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +115,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6575787920490739161
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655289262675971462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26208755, y: 0.38635826, z: 0.26208755}
+  m_Center: {x: 0, y: 0, z: 0}
