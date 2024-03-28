@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5b48279b4181499ab0f2b3488adea, type: 3}
+  m_Name: Acorn
+  m_EditorClassIdentifier: 
+  itemName: Acorn
+  itemType: 1
+  itemImage: {fileID: 21300000, guid: 61ad6acc48edb9f41be5725502b1e6ed, type: 3}
+  itemPrefabs:
+  - {fileID: 655289262675971462, guid: 2e7a8df0f0be18a4aa69002342ae75de, type: 3}
+  weaponType: 
