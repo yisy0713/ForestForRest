@@ -190,7 +190,6 @@ public class TerrainGenerator : MonoBehaviour
                 }
             }
         }
-
     }
 
     void GenerateNpc(Terrain terrain)
