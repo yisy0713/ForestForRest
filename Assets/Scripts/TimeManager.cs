@@ -33,7 +33,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private float spawnRadius = 10f; // 스폰 반경
     [SerializeField]
-    private float spawnInterval = 10f; // 스폰 간격
+    private float spawnInterval = 0.5f; // 스폰 간격
     private float nextSpawnTime = 0f;
 
     [SerializeField]
@@ -62,17 +62,14 @@ public class TimeManager : MonoBehaviour
         {
             isNight = false;
             Debug.Log("Day");
-            // 여기에 낮에 필요한 작업 추가
         }
         else if ((currentTime - (60 * currentDayCount) >= 30) && !isNight) // 밤이 되었을 때
         {
             isNight = true;
             Debug.Log("Night");
-            // 여기에 밤에 필요한 작업 추가
+            
             SpawnMonsters();
         }
-
-        
 
         UpdateUI();
     }
@@ -83,7 +80,7 @@ public class TimeManager : MonoBehaviour
             // 플레이어 주변에 몬스터 스폰
             Vector3 spawnOffset = Random.insideUnitSphere * spawnRadius;
             Vector3 spawnPosition = player.position + spawnOffset;
-            spawnPosition.y = 0;
+            spawnPosition.y = player.position.y + 5;
             Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
             nextSpawnTime = Time.time + spawnInterval;
         }
