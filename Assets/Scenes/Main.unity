@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731425, g: 0.13414538, b: 0.12108185, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731428, g: 0.13414538, b: 0.121081896, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -578,6 +578,10 @@ MonoBehaviour:
   oneDayCycle: 0.5
   timer: {fileID: 300671725}
   dayCounter: {fileID: 1289577986}
+  monsterPrefab: {fileID: 5909996899801010709, guid: e01714be71731d343b34073cf4b19133, type: 3}
+  spawnRadius: 10
+  spawnInterval: 10
+  player: {fileID: 3142240412883911504}
 --- !u!4 &36782553
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &336249276
 TerrainCollider:
   m_ObjectHideFlags: 0
