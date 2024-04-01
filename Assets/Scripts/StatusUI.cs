@@ -18,7 +18,7 @@ public class StatusUI : MonoBehaviour
     // 체력 Hp
     public float maxHp = 100f;
     public float curHp = 100f;
-    public float hpIncreaseSpeed = 1f;        // 체력 증가량
+    public float hpIncreaseSpeed = 1f;           // 체력 증가량
     public float hpRechargeTime = 500f;          // 체력 회복 딜레이 500
     public float curHpRechargeTime = 0f;
     private bool hpUpTime = false;
@@ -26,15 +26,15 @@ public class StatusUI : MonoBehaviour
     // 배고픔 Hungry
     public float maxHungry = 100f;
     public float curHungry = 100f;
-    public float hungryDecreaseTime = 30;     // 배고픔 감소 쿨타임
-    public float curHungryDecreaseTime = 0;    // 배고픔 감소 타이머
+    public float hungryDecreaseTime = 30;       // 배고픔 감소 쿨타임
+    public float curHungryDecreaseTime = 0;     // 배고픔 감소 타이머
     private bool imNotHungry = true;
 
     // 스테미나 Sp
     private float maxSp = 100f;
     private float curSp = 100f;
     public float spIncreaseSpeed = 20f;        // 스테미나 증가량
-    public float spRechargeTime = 3;          // 스테미나 회복 딜레이
+    public float spRechargeTime = 3;           // 스테미나 회복 딜레이
     public float curSpRechargeTime;
     private bool spUsed;                  // 스테미나 감소 여부 (true : 회복딜레이 / false : 회복시작)
 
