@@ -76,13 +76,13 @@ public class PlayerController : MonoBehaviour
         return statusController.GetIsDead();
     }
 
-    void Jump()
+    private void Jump()
     {
         myRigid.velocity = transform.up * jumpForce;
         statusController.DecreaseStamina(jumpingStamina);
     }
 
-    void IsGround()
+    private void IsGround()
     {
         isGround = Physics.Raycast(transform.position, -transform.up, capsuleCollider.bounds.extents.y + 0.1f);
         
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("isGround!");*/
     }
 
-    void TryJump()
+    private void TryJump()
     {
         if(Input.GetKeyDown(KeyCode.Space) && isGround && statusController.GetCurSp() > 0)
         {
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void TryRun()
+    private void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift) && statusController.GetCurSp() > 0)
         {
@@ -110,40 +110,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Running()
+    private void Running()
     {
         isRun = true;
         applySpeed = runSpeed;
         statusController.DecreaseStamina(runningStamina);
     }
 
-    void RunningCancel()
+    private void RunningCancel()
     {
         isRun = false;
         applySpeed = walkSpeed;
     }
 
-    void Move()
+    private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");           // 오른쪽 : 1 , 왼쪽 : -1, null : 0
         float _moveDirZ = Input.GetAxisRaw("Vertical");             // 앞 : 1 , 뒤 : -1, null : 0
 
-        Vector3 _moveHorizontal = transform.right * _moveDirX;
-        Vector3 _moveVertical = transform.forward * _moveDirZ;
+        transform.Translate(new Vector3(_moveDirX, 0, _moveDirZ) * Time.deltaTime * applySpeed);    // 물리 무시 이동
 
-        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * applySpeed;
-
-        myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        //Vector3 _moveHorizontal = transform.right * _moveDirX;        
+        //Vector3 _moveVertical = transform.forward * _moveDirZ; 
+        //Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * applySpeed;
+        //myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);        // 물리적 기반 이동 (terrain이 있을때와 없을때 이동속도 차이가 남)
     }
 
-    void CharacterRotation()
+    private void CharacterRotation()
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");
         Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
         myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
     }
 
-    void CameraRotation()
+    private void CameraRotation()
     {
         float _xRotation = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRotation * lookSensitivity;
