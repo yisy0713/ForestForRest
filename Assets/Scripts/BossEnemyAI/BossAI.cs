@@ -65,8 +65,53 @@ public class BossAI : Tree
                     })
                 })
             }),
-            // new Sequence Ãß°¡
-            
+            new Sequence(new List<Node>
+            {
+                new CheckHpEnough(transform, 20),
+                new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        // CheckOnGround
+                        // TaskFlyTakeOff
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckPlayerInRange(transform, farAttackRange),
+                        new Selector(new List<Node>
+                        {
+                            new Sequence(new List<Node>
+                            {
+                                // CheckAttackTimer
+                                new RandomSelector(new List<Node>
+                                {
+                                    // TaskFireBallAttack
+                                    // TaskGlideAttack
+                                })
+                            }),
+                            new TaskWaitAttack(transform)
+                        })
+                    }),
+                    new Selector(new List<Node>
+                    {
+                        new Sequence(new List<Node>
+                        {
+                            new CheckPlayerInRange(transform, farFovRange),
+                            new TaskGoToTarget(transform, rigid, flySpeed)
+                        }),
+                        // TaskHeal
+                    }),
+                })
+            }),
+            new Selector(new List<Node>
+            {
+                new Sequence(new List<Node>
+                {
+                    new CheckPlayerInRange(transform,fleeFovRange),
+                    // TaskFlee
+                }),
+                // TaskHeal
+            })
         });
 
         return root;
