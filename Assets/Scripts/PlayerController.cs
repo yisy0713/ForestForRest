@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         myRigid.velocity = transform.up * jumpForce;
-        statusController.DecreaseStamina(jumpingStamina);
+        statusController.DecreaseJumpStamina(jumpingStamina);
     }
 
     private void IsGround()

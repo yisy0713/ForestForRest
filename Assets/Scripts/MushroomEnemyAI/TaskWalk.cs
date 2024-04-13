@@ -32,6 +32,7 @@ public class TaskWalk : Node
 
         if (_wating)
         {
+            _animator.SetBool("Waiting", true);
             _waitCounter += Time.deltaTime;
 
             if (_waitCounter >= _waitTime)

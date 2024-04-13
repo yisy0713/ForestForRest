@@ -167,6 +167,18 @@ public class StatusUI : MonoBehaviour
         else
             curSp = 0;
     }
+    public void DecreaseJumpStamina(float count)
+    {
+        spUsed = true;
+        curSpRechargeTime = 0;
+
+        float decreaseAmount = count;
+
+        if (curSp - decreaseAmount > 0)
+            curSp -= decreaseAmount;
+        else
+            curSp = 0;
+    }
 
     private void SpRechargeTime()                  // 스테미나 회복 쿨타임 관리
     {

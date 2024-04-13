@@ -21,12 +21,11 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
-
-
         Transform target = (Transform)GetData("target");
         Vector3 directionToTarget = (target.position - _transform.position).normalized;
 
         _animator.SetBool("Walking", false);
+        _animator.SetBool("Waiting", false);
         _animator.SetBool("Running", true);
 
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
