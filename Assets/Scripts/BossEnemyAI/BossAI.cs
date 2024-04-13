@@ -3,14 +3,20 @@ using BehaviorTree;
 
 public class BossAI : Tree
 {
-    public UnityEngine.Transform[] wayPoints;
-    public UnityEngine.Transform returnPoint;
     public UnityEngine.Rigidbody rigid;
 
-    public static float speed = 1f;
-    public static float runSpeed = 3f;
-    private float fovRange = 8f;
-    private float attackRange = 1.2f;
+    public static float walkspeed = 5f;
+    public static float runSpeed = 15f;
+    public static float flySpeed = 30f;
+    private float nearAttackRange = 1.5f;
+    private float farAttackRange = 3f;
+    private float nearFovRange = 15f;
+    private float farFovRange = 60f;
+    private float fleeFovRange = 80f;
+    private float attackTimer = 2f;
+
+    public EnemyManager enemyManager;
+
 
     public static float timer = 0f;
     protected override Node SetupTree()
@@ -18,22 +24,97 @@ public class BossAI : Tree
         Node root = new Selector(new List<Node>
         {
             new CheckAmIDead(transform),
+
             new Sequence(new List<Node>
             {
-                new CheckPlayerInFovRange(transform, attackRange),
-                new TaskAttack(transform),
+                new CheckHpEnough(transform, 50),
+                new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        new CheckPlayerInRange(transform, nearAttackRange),
+                        new Selector(new List<Node>
+                        {
+                            new Sequence(new List<Node>
+                            {
+                                new CheckAttackTimer(attackTimer),
+                                new RandomSelector(new List<Node>
+                                {
+                                    new TaskTailAttack(transform),
+                                    new TaskFlameAttack(transform),
+                                    new TaskFireBallAttack(transform),
+                                    new TaskBiteAttack(transform)
+                                })
+                            }),
+                            new TaskWaitAttack(transform)
+                        })
+                    }),
+                    new Selector(new List<Node>
+                    {
+                        new Sequence(new List<Node>
+                        {
+                            new CheckPlayerInRange(transform, nearFovRange),
+                            new TaskGoToTarget(transform, rigid, runSpeed)
+                        }),
+                        new Sequence(new List<Node>
+                        {
+                            new CheckPlayerInRange(transform, farFovRange),
+                            new TaskGoToTarget(transform, rigid, flySpeed)
+                        }),
+                        new TaskPatrol(transform, rigid, walkspeed)
+                    })
+                })
             }),
-            new Sequence(new List<Node>
-            {
-                new CheckPlayerInFovRange(transform, fovRange),
-                new TaskGoToTarget(transform, rigid),
-            }),
-            new Sequence(new List<Node>
-            {
-                new TaskWalk(transform, rigid),
-            }),
+            // new Sequence Ãß°¡
+            
         });
 
         return root;
+    }
+}
+
+
+/// <summary>
+/// µð¹ö±×¿ë ³ëµåµé
+/// </summary>
+
+public class CheckRandom1 : Node
+{
+    public override NodeState Evaluate()
+    {
+        UnityEngine.Debug.Log("·£´ý 1111111111111");
+
+        state = NodeState.SUCCESS;
+        return state;
+    }
+}
+public class CheckRandom2 : Node
+{
+    public override NodeState Evaluate()
+    {
+        UnityEngine.Debug.Log("·£´ý 22222222222222");
+
+        state = NodeState.SUCCESS;
+        return state;
+    }
+}
+public class CheckRandom3 : Node
+{
+    public override NodeState Evaluate()
+    {
+        UnityEngine.Debug.Log("·£´ý 333333333333333");
+
+        state = NodeState.SUCCESS;
+        return state;
+    }
+}
+public class CheckRandom : Node
+{
+    public override NodeState Evaluate()
+    {
+        UnityEngine.Debug.Log("·£´ý----------------------");
+
+        state = NodeState.FAILURE;
+        return state;
     }
 }

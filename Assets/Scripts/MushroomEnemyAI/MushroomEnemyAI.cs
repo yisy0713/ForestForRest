@@ -26,7 +26,7 @@ public class MushroomEnemyAI : Tree
             new Sequence(new List<Node>
             {
                 new CheckPlayerInFovRange(transform, fovRange),
-                new TaskGoToTarget(transform, rigid),
+                new TaskGoToTarget(transform, rigid, runSpeed),
             }),
             new Sequence(new List<Node>
             {

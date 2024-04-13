@@ -28,6 +28,8 @@ public class TaskWalk : Node
 
     public override NodeState Evaluate()
     {
+        _animator.SetBool("Running", false);
+
         if (_wating)
         {
             _waitCounter += Time.deltaTime;
