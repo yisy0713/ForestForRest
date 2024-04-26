@@ -100,7 +100,7 @@ public class TimeManager : MonoBehaviour
     {
         if (isNight)
         {
-            Debug.Log("¹ã");
+            //Debug.Log("¹ã");
             if (currentFogDensity <= nightFogDensity)
             {
                 currentFogDensity += 0.1f * fogDensityCale * Time.deltaTime;
@@ -109,7 +109,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("³·");
+            //Debug.Log("³·");
             if (currentFogDensity >= dayFogDensity)
             {
                 currentFogDensity -= 0.5f * fogDensityCale * Time.deltaTime;
