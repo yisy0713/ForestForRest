@@ -19,7 +19,7 @@ public class CheckAttackTimer : Node
         if (_timer < _attackTimer)
         {
             _timer += Time.deltaTime;
-            state = NodeState.FAILURE;
+            state = NodeState.RUNNING;
             return state;
         }
         _timer = 0;

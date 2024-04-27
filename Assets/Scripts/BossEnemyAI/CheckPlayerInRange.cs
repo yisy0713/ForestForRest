@@ -31,7 +31,7 @@ public class CheckPlayerInRange : Node
 
             if (findPlayer)
             {
-                Debug.Log("isInRange!");
+                //Debug.Log("isInRange!");
                 parent.parent.SetData("target", colliders[0].transform);
                 //_animator.SetBool("Running", true);
                 state = NodeState.SUCCESS;
@@ -42,19 +42,19 @@ public class CheckPlayerInRange : Node
         {
             if (findPlayer)
             {
-                Debug.Log("isInRange!");
+                //Debug.Log("isInRange!");
                 state = NodeState.SUCCESS;
                 return state;
             }
             else
             {
-                Debug.Log("isNotInRange!");
+                //Debug.Log("isNotInRange!");
                 parent.parent.SetData("target", null);
                 state = NodeState.FAILURE;
                 return state;
             }
         }
-        Debug.Log("isNotAttackRange!");
+        //Debug.Log("isNotAttackRange!");
         state = NodeState.FAILURE;
         return state;
     }
