@@ -33,7 +33,7 @@ public class TaskReturn : Node
         else
         {
             _animator.SetBool("Walking", true);
-            _transform.position = Vector3.MoveTowards(_transform.position, wp.position, MushroomEnemyAI.speed * Time.deltaTime);
+            _transform.position = Vector3.MoveTowards(_transform.position, wp.position, MushroomEnemyAI.walkSpeed * Time.deltaTime);
             _transform.LookAt(wp.position);
         }
 

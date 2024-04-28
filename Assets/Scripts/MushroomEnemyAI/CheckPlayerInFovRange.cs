@@ -9,13 +9,13 @@ public class CheckPlayerInFovRange : Node
     private static int _playerLayerMask = 1 << 8;
 
     private Transform _transform;
-    private Animator _animator;
+    //private Animator _animator;
     private float _range;
 
     public CheckPlayerInFovRange(Transform transform, float range)
     {
         _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+        //_animator = transform.GetComponent<Animator>();
         _range = range;
     }
 

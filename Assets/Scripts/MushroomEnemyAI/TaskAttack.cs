@@ -28,17 +28,15 @@ public class TaskAttack : Node
         _attackCounter += Time.deltaTime;
         if(_attackCounter >= _attackTime)
         {
-            _animator.SetBool("Running", false);
-            _animator.SetTrigger("Attack");
+            //_animator.SetBool("Running", false);
+            //_animator.SetTrigger("Attack");
             _playerStatus.DecreaseHp(MushroomAttackPower);
 
             bool playerIsDead = _playerStatus.GetIsDead();
             if (playerIsDead)
             {
                 ClearData("target");
-                //_animator.SetTrigger("Attack");
-                _animator.SetBool("Attacking", false);
-                //_animator.SetBool("Walking", true);
+                //_animator.SetBool("Attacking", false);
 
                 state = NodeState.FAILURE;
                 return state;

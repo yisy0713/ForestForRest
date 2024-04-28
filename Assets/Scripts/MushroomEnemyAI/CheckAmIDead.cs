@@ -20,7 +20,7 @@ public class CheckAmIDead : Node
     {
         if (_enemyManager.enemyDead)
         {
-            _animator.SetBool("isDead", true);
+            //_animator.SetBool("isDead", true);
                
             state = NodeState.SUCCESS;
             return state;

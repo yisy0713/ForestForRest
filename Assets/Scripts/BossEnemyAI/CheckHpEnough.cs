@@ -23,12 +23,12 @@ public class CheckHpEnough : Node
     {
         if (_enemyManager.curHp > _hp)
         {
-            Debug.Log("chekHpEnough!!");
+            //Debug.Log("chekHpEnough!!");
             state = NodeState.SUCCESS;
             return state;
         }
 
-        Debug.Log("HpNOTEnough!!");
+        //Debug.Log("HpNOTEnough!!");
         //_animator.SetBool("Die", true);
         state = NodeState.FAILURE;
         return state;

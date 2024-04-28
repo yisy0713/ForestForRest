@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 1130256885740540633}
   - component: {fileID: 1130256885740540628}
   m_Layer: 0
-  m_Name: MushroomAngryPBR
+  m_Name: MushroomEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

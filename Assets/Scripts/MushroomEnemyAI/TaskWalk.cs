@@ -22,17 +22,17 @@ public class TaskWalk : Node
     public TaskWalk(Transform transform, Rigidbody rigid)
     {
         _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+        //_animator = transform.GetComponent<Animator>();
         _rigid = rigid;
     }
 
     public override NodeState Evaluate()
     {
-        _animator.SetBool("Running", false);
+        //_animator.SetBool("Running", false);
 
         if (_wating)
         {
-            _animator.SetBool("Waiting", true);
+            //_animator.SetBool("Waiting", true);
             _waitCounter += Time.deltaTime;
 
             if (_waitCounter >= _waitTime)
@@ -48,8 +48,8 @@ public class TaskWalk : Node
                 direction.Set(0f, Random.Range(0f, 360f), 0f);
 
                 _walkCounter = 0f;
-                _animator.SetBool("Walking", false);
-                _animator.SetBool("Waiting", true);
+                //_animator.SetBool("Walking", false);
+                //_animator.SetBool("Waiting", true);
 
                 _waitCounter = 0f;
                 _wating = true;
@@ -59,13 +59,12 @@ public class TaskWalk : Node
             }
             else
             {
-                _animator.SetBool("Walking", true);
-                _animator.SetBool("Waiting", false);
-
+                //_animator.SetBool("Walking", true);
+                //_animator.SetBool("Waiting", false);
                 Quaternion targetRotation = Quaternion.Euler(0f, direction.y, 0f);
                 Quaternion smoothRotation = Quaternion.Lerp(_transform.rotation, targetRotation, 0.01f);
                 _rigid.MoveRotation(smoothRotation);
-                _rigid.MovePosition(_transform.position + (_transform.forward * MushroomEnemyAI.speed * Time.deltaTime));
+                _rigid.MovePosition(_transform.position + (_transform.forward * MushroomEnemyAI.walkSpeed * Time.deltaTime));
             }
         }
 

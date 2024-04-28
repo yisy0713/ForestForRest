@@ -14,7 +14,7 @@ public class TaskGoToTarget : Node
     public TaskGoToTarget(Transform transform, Rigidbody rigid, float speed)
     {
         _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+        //_animator = transform.GetComponent<Animator>();
         _rigid = rigid;
         _speed = speed;
     }
@@ -24,9 +24,9 @@ public class TaskGoToTarget : Node
         Transform target = (Transform)GetData("target");
         Vector3 directionToTarget = (target.position - _transform.position).normalized;
 
-        _animator.SetBool("Walking", false);
-        _animator.SetBool("Waiting", false);
-        _animator.SetBool("Running", true);
+        //_animator.SetBool("Walking", false);
+        //_animator.SetBool("Waiting", false);
+        //_animator.SetBool("Running", true);
 
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
         {
