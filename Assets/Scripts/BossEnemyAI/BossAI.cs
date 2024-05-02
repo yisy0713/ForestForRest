@@ -9,8 +9,8 @@ public class BossAI : Tree
     public static float runSpeed = 15f;
     public static float flySpeed = 30f;
     private float nearAttackRange = 10f;
-    private float farAttackRange = 10f;
-    private float nearFovRange = 15f;
+    private float farAttackRange = 15f;
+    private float nearFovRange = 30f;
     private float farFovRange = 60f;
     private float fleeFovRange = 80f;
     private float attackTimer = 2f;
