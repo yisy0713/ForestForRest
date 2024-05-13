@@ -791,7 +791,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &108420814 stripped
 Transform:
@@ -890,7 +890,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 55, y: 50, z: 130}
 --- !u!1 &134945078
 GameObject:
@@ -1316,7 +1316,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &245692133
 PrefabInstance:
@@ -1684,6 +1684,7 @@ GameObject:
   - component: {fileID: 336249277}
   - component: {fileID: 336249276}
   - component: {fileID: 336249279}
+  - component: {fileID: 336249280}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -1750,7 +1751,7 @@ Transform:
   m_Children:
   - {fileID: 1577664781}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &336249279
 MonoBehaviour:
@@ -1808,6 +1809,35 @@ MonoBehaviour:
   heightMultiplier: 2
   falloffStart: 400
   falloffEnd: 500
+--- !u!114 &336249280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336249275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 87335
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &352624156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2213,7 +2243,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &395883626
 PrefabInstance:
@@ -2450,9 +2480,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5909996899801010709, guid: e01714be71731d343b34073cf4b19133, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6435457443232008367, guid: e01714be71731d343b34073cf4b19133, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6435457443232008367, guid: e01714be71731d343b34073cf4b19133, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2460,7 +2494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435457443232008367, guid: e01714be71731d343b34073cf4b19133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.050000668
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6435457443232008367, guid: e01714be71731d343b34073cf4b19133, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4817,7 +4851,7 @@ Transform:
   - {fileID: 995343185}
   - {fileID: 995296749}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &995283513
 Transform:
@@ -7759,7 +7793,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1325595489
 GameObject:
@@ -8279,7 +8313,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1384549734
 MeshCollider:
@@ -8954,7 +8988,7 @@ GameObject:
   - component: {fileID: 1577664780}
   - component: {fileID: 1577664779}
   - component: {fileID: 1577664778}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Water
   m_TagString: WATER
   m_Icon: {fileID: 0}
@@ -11041,7 +11075,7 @@ Transform:
   - {fileID: 2027409149}
   - {fileID: 34336785}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1001 &2142566895
 PrefabInstance:
@@ -11224,7 +11258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745464878999437365}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 500, y: 26.8, z: 500}
+  m_LocalPosition: {x: 500, y: 30, z: 500}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -11233,7 +11267,7 @@ Transform:
   - {fileID: 52473559}
   - {fileID: 1910860880}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3529364751291800901
 GameObject:
@@ -11798,7 +11832,7 @@ Transform:
   - {fileID: 4530003304641469382}
   - {fileID: 4530003304641469402}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4530003304641469382
 Transform:
@@ -13217,7 +13251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc024a4d63c5b846b28ca7ada8c2d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
+  walkSpeed: 20
   runSpeed: 6
   runningStamina: 30
   jumpingStamina: 30

@@ -70,6 +70,8 @@ public class TaskPatrol : Node
             }
         }
 
+        Debug.Log("Patrollllllllllllllllllllllllllll");
+
         state = NodeState.RUNNING;
         return state;
     }

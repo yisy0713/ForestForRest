@@ -5265,6 +5265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7499791245595560195}
   - component: {fileID: 7499791245595560194}
+  - component: {fileID: 4432953297436587989}
   m_Layer: 12
   m_Name: Mesh_LOD0
   m_TagString: Untagged
@@ -5349,6 +5350,14 @@ SkinnedMeshRenderer:
     m_Center: {x: 6.9849193e-10, y: -0.0026330086, z: 0.0132713355}
     m_Extent: {x: 0.0071849767, y: 0.015359104, z: 0.013908608}
   m_DirtyAABB: 0
+--- !u!33 &4432953297436587989
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499791245595560204}
+  m_Mesh: {fileID: -5523277661179574252, guid: 4b60f39d1f696dd4db7bd987f185e074, type: 3}
 --- !u!1 &7499791245632897353
 GameObject:
   m_ObjectHideFlags: 0

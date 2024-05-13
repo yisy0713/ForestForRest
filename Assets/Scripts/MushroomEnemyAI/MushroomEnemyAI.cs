@@ -28,10 +28,7 @@ public class MushroomEnemyAI : Tree
                 new CheckPlayerInRange(transform, fovRange),
                 new TaskGoToTarget(transform, rigid, runSpeed),
             }),
-            new Sequence(new List<Node>
-            {
-                new TaskPatrol(transform, rigid, walkSpeed)
-            }),
+            new TaskPatrol(transform, rigid, walkSpeed)
         });
 
         return root;

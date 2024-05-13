@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class TerrainGenerator : MonoBehaviour
     public float falloffStart = 400f;
     public float falloffEnd = 500f;
 
+    NavMeshSurface navMeshSurface;
+
     void Start()
     {
         offsetX = Random.Range(0f, 9999f);                              // ·£´ýÇÑ ÁöÇü ÁÂÇ¥ ¼³Á¤
@@ -58,6 +61,8 @@ public class TerrainGenerator : MonoBehaviour
         GenerateTrash(terrain);
         GenerateNpc(terrain);
         GenerateTrashBag(terrain);
+
+        BakeNavMesh();
     }
 
     void Update()
@@ -246,6 +251,12 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
 
+    }
+
+    private void BakeNavMesh()
+    {
+        NavMeshSurface navMeshSurface = GetComponent<NavMeshSurface>();
+        navMeshSurface.BuildNavMesh();
     }
 
 }
