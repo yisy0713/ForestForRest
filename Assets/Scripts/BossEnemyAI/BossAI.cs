@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BehaviorTree;
+using UnityEngine.AI;
 
 public class BossAI : Tree
 {
@@ -17,8 +18,35 @@ public class BossAI : Tree
 
     public EnemyManager enemyManager;
 
+    public NavMeshAgent navMeshAgent;
 
     public static float timer = 0f;
+
+    private void Awake()
+    {
+        // NavMesh 상의 유효한 위치 찾기
+        UnityEngine.Vector3 position = transform.position;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(position, out hit, UnityEngine.Mathf.Infinity, NavMesh.AllAreas))
+        {
+            // 유효한 위치를 NavMeshAgent의 초기 위치로 설정
+            transform.position = hit.position;
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+            UnityEngine.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
+            navMeshAgent.Warp(hit.position);
+        }
+        else
+        {
+            UnityEngine.Debug.LogError("No valid NavMesh location found for setting initial position!");
+        }
+
+        if (navMeshAgent == null)
+        {
+            UnityEngine.Debug.Log("NavMeshAgent is not assigned or is invalid!!!!!!!!!!!!!");
+        }
+
+    }
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
@@ -54,12 +82,12 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, nearFovRange),
-                            new TaskGoToTarget(transform, rigid, runSpeed)
+                            new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent)
                         }),
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
-                            new TaskGoToTarget(transform, rigid, flySpeed)
+                            //new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
                         }),
                         new TaskPatrol(transform, rigid, walkspeed)
                     })
@@ -97,7 +125,7 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
-                            new TaskGoToTarget(transform, rigid, flySpeed)
+                            //new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
                         }),
                         // TaskHeal
                     }),

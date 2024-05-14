@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BehaviorTree;
+using UnityEngine.AI;
 
 public class MushroomEnemyAI : Tree
 {
@@ -13,6 +14,12 @@ public class MushroomEnemyAI : Tree
     private float attackRange = 1.2f;
 
     public static float timer = 0f;
+
+    private NavMeshAgent navMeshAgent;
+    private void Awake()
+    {
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
+    }
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
@@ -26,7 +33,7 @@ public class MushroomEnemyAI : Tree
             new Sequence(new List<Node>
             {
                 new CheckPlayerInRange(transform, fovRange),
-                new TaskGoToTarget(transform, rigid, runSpeed),
+                new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent),
             }),
             new TaskPatrol(transform, rigid, walkSpeed)
         });

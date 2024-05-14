@@ -48,7 +48,7 @@ public class TerrainGenerator : MonoBehaviour
 
     NavMeshSurface navMeshSurface;
 
-    void Start()
+    void Awake()
     {
         offsetX = Random.Range(0f, 9999f);                              // ·£´ýÇÑ ÁöÇü ÁÂÇ¥ ¼³Á¤
         offsetY = Random.Range(0f, 9999f);
@@ -250,13 +250,17 @@ public class TerrainGenerator : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void BakeNavMesh()
     {
         NavMeshSurface navMeshSurface = GetComponent<NavMeshSurface>();
+
+        navMeshSurface.RemoveData();
+
         navMeshSurface.BuildNavMesh();
+
+        Debug.Log("BakedNavMesh");
     }
 
 }

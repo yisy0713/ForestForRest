@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigid;
     private StatusUI statusController;
 
+    public GameObject GreenBoss;        // 네비메쉬디버그용
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,11 @@ public class PlayerController : MonoBehaviour
         else if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W))
         {
             isStop = true;
+        }
+
+        if (Input.GetKey(KeyCode.Z))        // 네비메쉬 디버그용
+        {
+            GreenBoss.SetActive(true);
         }
     }
 
