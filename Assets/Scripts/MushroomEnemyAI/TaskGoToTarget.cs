@@ -20,7 +20,7 @@ public class TaskGoToTarget : Node
         _rigid = rigid;
         _speed = speed;
         _navMeshAgent = navMeshAgent;
-        Debug.Log("고투타겟 생성자 호출!");
+        //Debug.Log("고투타겟 생성자 호출!");
     }
 
     public override NodeState Evaluate()

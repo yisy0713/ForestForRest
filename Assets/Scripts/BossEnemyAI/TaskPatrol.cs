@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using BehaviorTree;
 
 public class TaskPatrol : Node
@@ -8,6 +9,7 @@ public class TaskPatrol : Node
     private Transform _transform;
     private Animator _animator;
     private Rigidbody _rigid;
+    private NavMeshAgent _navMeshAgent;
 
     private float _walkTime = 8f;
     private float _walkCounter = 0f;
@@ -20,12 +22,13 @@ public class TaskPatrol : Node
 
     private Vector3 direction;
 
-    public TaskPatrol(Transform transform, Rigidbody rigid, float speed)
+    public TaskPatrol(Transform transform, Rigidbody rigid, float speed, NavMeshAgent navMeshAgent)
     {
         _transform = transform;
         _animator = transform.GetComponent<Animator>();
         _rigid = rigid;
         _speed = speed;
+        _navMeshAgent = navMeshAgent;
     }
 
     public override NodeState Evaluate()
@@ -66,7 +69,9 @@ public class TaskPatrol : Node
                 Quaternion targetRotation = Quaternion.Euler(0f, direction.y, 0f);
                 Quaternion smoothRotation = Quaternion.Lerp(_transform.rotation, targetRotation, 0.01f);
                 _rigid.MoveRotation(smoothRotation);
-                _rigid.MovePosition(_transform.position + (_transform.forward * _speed * Time.deltaTime));
+                Vector3 moveDirection = _transform.forward * _speed * Time.deltaTime;
+                _navMeshAgent.SetDestination(moveDirection);
+                //_rigid.MovePosition(_transform.position + (_transform.forward * _speed * Time.deltaTime));
             }
         }
 

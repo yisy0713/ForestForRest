@@ -87,9 +87,9 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
-                            //new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
+                            new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
                         }),
-                        new TaskPatrol(transform, rigid, walkspeed)
+                        new TaskPatrol(transform, rigid, walkspeed, navMeshAgent)
                     })
                 })
             }),
@@ -125,7 +125,7 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
-                            //new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
+                            new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
                         }),
                         // TaskHeal
                     }),
