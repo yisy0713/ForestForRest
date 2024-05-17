@@ -16,11 +16,13 @@ public class TaskPatrol : Node
 
     private float _waitTime = 5f;
     private float _waitCounter = 0f;
-    private bool _wating = false;
+    private bool _waiting = false;
 
     private float _speed;
 
     private Vector3 direction;
+
+    private Vector3 target;
 
     public TaskPatrol(Transform transform, Rigidbody rigid, float speed, NavMeshAgent navMeshAgent)
     {
@@ -36,13 +38,16 @@ public class TaskPatrol : Node
         //_animator.SetBool("Fly", false);
         //_animator.SetBool("Sleeping", false);
 
-        if (_wating)        // 기다리기
+        if (_waiting)        // 기다리기
         {
+            Debug.Log("Wait");
+
             _waitCounter += Time.deltaTime;
 
             if (_waitCounter >= _waitTime)
             {
-                _wating = false;
+                _waiting = false;
+                _walkCounter = 0f;
             }
         }
         else
@@ -50,32 +55,41 @@ public class TaskPatrol : Node
             _walkCounter += Time.deltaTime;
             if (_walkCounter >= _walkTime)
             {
-                direction.Set(0f, Random.Range(0f, 360f), 0f);
+                Vector3 randomDirection = Random.insideUnitSphere * 10f; // 10 단위 거리만큼 이동
+                randomDirection += _transform.position;
+
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(randomDirection, out hit, 1.0f, NavMesh.AllAreas))
+                {
+                    target = hit.position; // 유효한 위치로 설정
+                    _navMeshAgent.SetDestination(target);
+                }
 
                 _walkCounter = 0f;
-                //_animator.SetBool("Walking", false);
-                //_animator.SetBool("Waiting", true);
-
                 _waitCounter = 0f;
-                _wating = true;
+                _waiting = true;
 
                 state = NodeState.RUNNING;
                 return state;
             }
             else     // 걷기 
             {
-               // _animator.SetBool("Walking", true);
-               // _animator.SetBool("Waiting", false);
-                Quaternion targetRotation = Quaternion.Euler(0f, direction.y, 0f);
-                Quaternion smoothRotation = Quaternion.Lerp(_transform.rotation, targetRotation, 0.01f);
-                _rigid.MoveRotation(smoothRotation);
-                Vector3 moveDirection = _transform.forward * _speed * Time.deltaTime;
-                _navMeshAgent.SetDestination(moveDirection);
-                //_rigid.MovePosition(_transform.position + (_transform.forward * _speed * Time.deltaTime));
+                Debug.Log("Walking");
+
+                if (_navMeshAgent.remainingDistance < 0.5f)
+                {
+                    Vector3 randomDirection = Random.insideUnitSphere * 10f; // 10 단위 거리만큼 이동
+                    randomDirection += _transform.position;
+
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(randomDirection, out hit, 1.0f, NavMesh.AllAreas))
+                    {
+                        target = hit.position; // 유효한 위치로 설정
+                        _navMeshAgent.SetDestination(target);
+                    }
+                }
             }
         }
-
-        Debug.Log("Patrollllllllllllllllllllllllllll");
 
         state = NodeState.RUNNING;
         return state;
