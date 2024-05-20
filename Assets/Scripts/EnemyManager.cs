@@ -32,6 +32,7 @@ public class EnemyManager : MonoBehaviour
         {
             StartCoroutine(DisableObjectAfterDelay(2f));
         }
+
     }
 
     public void EnemyDecreaseHp(float count)
@@ -44,7 +45,6 @@ public class EnemyManager : MonoBehaviour
             {
                 EnemyDead();
                 enemyDead = true;
-                
             }
         }
 

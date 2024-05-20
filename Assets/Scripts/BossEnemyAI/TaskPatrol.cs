@@ -35,6 +35,7 @@ public class TaskPatrol : Node
 
     public override NodeState Evaluate()
     {
+        _navMeshAgent.speed = _speed;
         //_animator.SetBool("Fly", false);
         //_animator.SetBool("Sleeping", false);
 

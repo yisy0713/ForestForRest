@@ -672,7 +672,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 70711
+    m_Bits: 70775
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 336249276}
   - component: {fileID: 336249279}
   - component: {fileID: 336249280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1827,7 +1827,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 87335
+    m_Bits: 87367
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -3185,8 +3185,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658698091}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00000071525574, z: -0.000030521303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4844,7 +4844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995560747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 510.16, y: 44.6, z: 500.96}
+  m_LocalPosition: {x: 510.16, y: 30, z: 500.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6610,7 +6610,7 @@ Animator:
   m_GameObject: {fileID: 995560747}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 063e65bf9ea59ea44bb459f4b7490fd3, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3705d3d72efc1104fa7fa5b1ae6aa552, type: 2}
+  m_Controller: {fileID: 9100000, guid: aa0ccfe45c230a946a70e782df87d322, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6649,6 +6649,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 1002754083}
+  walkspeed: 5
+  runSpeed: 5
+  flySpeed: 30
+  nearAttackRange: 10
+  farAttackRange: 15
+  nearFovRange: 30
+  farFovRange: 60
+  fleeFovRange: 80
+  attackTimer: 5
   enemyManager: {fileID: 1002754078}
   navMeshAgent: {fileID: 0}
 --- !u!136 &1002754081
@@ -6662,9 +6671,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 2.1107407
-  m_Height: 4.5421467
+  m_Height: 4.4419556
   m_Direction: 1
-  m_Center: {x: 0, y: 2.2305422, z: 0}
+  m_Center: {x: 0, y: 2.2806377, z: 0}
 --- !u!65 &1002754082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6674,10 +6683,10 @@ BoxCollider:
   m_GameObject: {fileID: 995560747}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.39328, y: 3.2866974, z: 4.455475}
-  m_Center: {x: 0, y: 1.6869409, z: 0.3320465}
+  m_Size: {x: 3.39328, y: 3.030071, z: 4.455475}
+  m_Center: {x: 0, y: 1.8152541, z: 0.3320465}
 --- !u!54 &1002754083
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6690,7 +6699,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -7040,7 +7049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196079028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.00000071525574, z: -0.000030521303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12865,6 +12874,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
+  walkspeed: 5
+  runSpeed: 15
+  flySpeed: 30
+  nearAttackRange: 10
+  farAttackRange: 15
+  nearFovRange: 30
+  farFovRange: 60
+  fleeFovRange: 80
+  attackTimer: 5
   enemyManager: {fileID: 4530003304641955815}
   navMeshAgent: {fileID: 0}
 --- !u!1 &4530003304641955814

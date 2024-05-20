@@ -6,15 +6,15 @@ public class BossAI : Tree
 {
     public UnityEngine.Rigidbody rigid;
 
-    public static float walkspeed = 5f;
-    public static float runSpeed = 15f;
-    public static float flySpeed = 30f;
-    private float nearAttackRange = 10f;
-    private float farAttackRange = 15f;
-    private float nearFovRange = 30f;
-    private float farFovRange = 60f;
-    private float fleeFovRange = 80f;
-    private float attackTimer = 2f;
+    public float walkspeed = 5f;
+    public float runSpeed = 5f;
+    public float flySpeed = 30f;
+    public float nearAttackRange = 10f;
+    public float farAttackRange = 15f;
+    public float nearFovRange = 30f;
+    public float farFovRange = 60f;
+    public float fleeFovRange = 80f;
+    public float attackTimer = 5f;
 
     public EnemyManager enemyManager;
 
@@ -33,16 +33,9 @@ public class BossAI : Tree
             transform.position = hit.position;
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             UnityEngine.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
+            navMeshAgent.radius = 2.3f;
+            navMeshAgent.height = 3f;
             navMeshAgent.Warp(hit.position);
-        }
-        else
-        {
-            UnityEngine.Debug.LogError("No valid NavMesh location found for setting initial position!");
-        }
-
-        if (navMeshAgent == null)
-        {
-            UnityEngine.Debug.Log("NavMeshAgent is not assigned or is invalid!!!!!!!!!!!!!");
         }
 
     }

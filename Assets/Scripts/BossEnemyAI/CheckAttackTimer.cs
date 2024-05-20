@@ -7,7 +7,7 @@ using BehaviorTree;
 public class CheckAttackTimer : Node
 {
     private float _attackTimer;
-    private float _timer = 0f;
+    private float _currTimer = 0f;
 
     public CheckAttackTimer(float attackTimer)
     {
@@ -16,13 +16,15 @@ public class CheckAttackTimer : Node
 
     public override NodeState Evaluate()
     {
-        if (_timer < _attackTimer)
+        //Debug.Log("AttackCoolTime");
+
+        if (_currTimer < _attackTimer)
         {
-            _timer += Time.deltaTime;
+            _currTimer += Time.deltaTime;
             state = NodeState.RUNNING;
             return state;
         }
-        _timer = 0;
+        _currTimer = 0;
         state = NodeState.SUCCESS;
         return state;
     }
