@@ -43,6 +43,16 @@ public class TaskPatrol : Node
         {
             Debug.Log("Wait");
 
+            _animator.SetBool("Idle", true);
+
+            foreach (AnimatorControllerParameter parameter in _animator.parameters)
+            {
+                if (parameter.name == "Idle")
+                    continue;
+
+                _animator.SetBool(parameter.name, false);
+            }
+
             _waitCounter += Time.deltaTime;
 
             if (_waitCounter >= _waitTime)
@@ -76,6 +86,16 @@ public class TaskPatrol : Node
             else     // °È±â 
             {
                 Debug.Log("Walking");
+
+                _animator.SetBool("Walk", true);
+
+                foreach (AnimatorControllerParameter parameter in _animator.parameters)
+                {
+                    if (parameter.name == "Walk")
+                        continue;
+
+                    _animator.SetBool(parameter.name, false);
+                }
 
                 if (_navMeshAgent.remainingDistance < 0.5f)
                 {

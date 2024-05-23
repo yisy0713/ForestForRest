@@ -13,7 +13,7 @@ public class TaskWaitAttack : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("AttackCoolTime");
+        //Debug.Log("AttackCoolTime");
 
         state = NodeState.RUNNING;
         return state;

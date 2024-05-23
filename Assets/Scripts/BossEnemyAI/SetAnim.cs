@@ -1,18 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class SetAnim : MonoBehaviour
+using BehaviorTree;
+
+public class SetAnim : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform _transform;
+    private Animator _animator;
+    private string _animParameter;
+    //private Rigidbody _rigid;
+
+    public SetAnim(Transform transform, string animParameter)
     {
-        
+        _transform = transform;
+        //_rigid = rigid;
+        _animator = transform.GetComponent<Animator>();
+        _animParameter = animParameter;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+
+        //Debug.Log( "SetAnim : " + _animParameter);
+
+        _animator.SetBool(_animParameter, true);
+        _animator.SetTrigger(_animParameter);
+
+        foreach (AnimatorControllerParameter parameter in _animator.parameters)
+        {
+            if (parameter.name == _animParameter)
+                continue;
+
+            _animator.SetBool(parameter.name, false);
+        }
+
+        //Debug.Log("GoToTarget  " + _navMeshAgent.speed);
+
+        //_animator.SetBool("Walking", false);
+        //_animator.SetBool("Waiting", false);
+        //_animator.SetBool("Running", true);
+
+        state = NodeState.SUCCESS;
+        return state;
     }
 }

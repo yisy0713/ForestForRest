@@ -16,12 +16,11 @@ public class CheckAttackTimer : Node
 
     public override NodeState Evaluate()
     {
-        //Debug.Log("AttackCoolTime");
-
+        Debug.Log(_currTimer);
         if (_currTimer < _attackTimer)
         {
             _currTimer += Time.deltaTime;
-            state = NodeState.RUNNING;
+            state = NodeState.FAILURE;
             return state;
         }
         _currTimer = 0;

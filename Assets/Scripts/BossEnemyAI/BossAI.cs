@@ -6,15 +6,17 @@ public class BossAI : Tree
 {
     public UnityEngine.Rigidbody rigid;
 
-    public float walkspeed = 5f;
-    public float runSpeed = 5f;
-    public float flySpeed = 30f;
-    public float nearAttackRange = 10f;
-    public float farAttackRange = 15f;
-    public float nearFovRange = 30f;
-    public float farFovRange = 60f;
-    public float fleeFovRange = 80f;
-    public float attackTimer = 5f;
+    private UnityEngine.Animator animator;
+
+    private float walkspeed = 5f;
+    private float runSpeed = 10f;
+    private float flySpeed = 30f;
+    private float nearAttackRange = 10f;
+    private float farAttackRange = 15f;
+    private float nearFovRange = 30f;
+    private float farFovRange = 60f;
+    private float fleeFovRange = 80f;
+    private float attackTimer = 3f;
 
     public EnemyManager enemyManager;
 
@@ -24,6 +26,8 @@ public class BossAI : Tree
 
     private void Awake()
     {
+        animator = GetComponent<UnityEngine.Animator>();
+
         // NavMesh 상의 유효한 위치 찾기
         UnityEngine.Vector3 position = transform.position;
         NavMeshHit hit;
@@ -32,8 +36,8 @@ public class BossAI : Tree
             // 유효한 위치를 NavMeshAgent의 초기 위치로 설정
             transform.position = hit.position;
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            UnityEngine.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
-            navMeshAgent.radius = 2.3f;
+            //.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
+            navMeshAgent.radius = 1f;
             navMeshAgent.height = 3f;
             navMeshAgent.Warp(hit.position);
         }
@@ -54,6 +58,7 @@ public class BossAI : Tree
                     new Sequence(new List<Node>
                     {
                         new CheckPlayerInRange(transform, nearAttackRange),
+                        new SetAnim(transform, "Idle"),
                         new Selector(new List<Node>
                         {
                             new Sequence(new List<Node>
@@ -61,13 +66,33 @@ public class BossAI : Tree
                                 new CheckAttackTimer(attackTimer),
                                 new RandomSelector(new List<Node>
                                 {
-                                    new TaskTailAttack(transform),
-                                    new TaskFlameAttack(transform),
-                                    new TaskFireBallAttack(transform),
-                                    new TaskBiteAttack(transform)
+                                    new Sequence(new List<Node>
+                                    {
+                                        new SetAnim(transform, "Fireball"),
+                                        new TaskTailAttack(transform)
+                                    }),
+                                    new Sequence(new List<Node>
+                                    {
+                                        new SetAnim(transform, "Fireball"),
+                                        new TaskFlameAttack(transform)
+                                    }),
+                                    new Sequence(new List<Node>
+                                    {
+                                        new SetAnim(transform, "Fireball"),
+                                        new TaskFireBallAttack(transform)
+                                    }),
+                                    new Sequence(new List<Node>
+                                    {
+                                        new SetAnim(transform, "Fireball"),
+                                        new TaskBiteAttack(transform)
+                                    }),
                                 })
                             }),
-                            new TaskWaitAttack(transform)
+                            new Sequence(new List<Node>
+                            {
+                                new SetAnim(transform, "Idle"),
+                                new TaskWaitAttack(transform)
+                            })
                         })
                     }),
                     new Selector(new List<Node>
@@ -75,11 +100,13 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, nearFovRange),
-                            new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent)
+                            new SetAnim(transform, "Run"),
+                            new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent),
                         }),
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
+                            new SetAnim(transform, "Fly"),
                             new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
                         }),
                         new TaskPatrol(transform, rigid, walkspeed, navMeshAgent)
