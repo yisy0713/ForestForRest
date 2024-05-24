@@ -12,11 +12,11 @@ public class CheckAttackTimer : Node
     public CheckAttackTimer(float attackTimer)
     {
         _attackTimer = attackTimer;
+        _currTimer = _attackTimer - 1;
     }
 
     public override NodeState Evaluate()
     {
-        Debug.Log(_currTimer);
         if (_currTimer < _attackTimer)
         {
             _currTimer += Time.deltaTime;

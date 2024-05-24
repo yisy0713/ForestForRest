@@ -11,6 +11,7 @@ TagManager:
   - Passive
   - EnemySpawn
   - SpawnedEnemy
+  - Hill
   layers:
   - Default
   - TransparentFX

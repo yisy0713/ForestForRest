@@ -11,14 +11,25 @@ public class MushroomEnemyAI : Tree
     public static float walkSpeed = 1.5f;
     public static float runSpeed = 3f;
     private float fovRange = 8f;
-    private float attackRange = 1.2f;
+    private float attackRange = 2f;
+    private float attackCoolTime = 1f;
+    private float attackDamage = 15f;
 
     public static float timer = 0f;
 
     private NavMeshAgent navMeshAgent;
     private void Awake()
     {
-        navMeshAgent = transform.GetComponent<NavMeshAgent>();
+        UnityEngine.Vector3 position = transform.position;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(position, out hit, UnityEngine.Mathf.Infinity, NavMesh.AllAreas))
+        {
+            transform.position = hit.position;
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+            navMeshAgent.radius = 1f;
+            navMeshAgent.height = 3f;
+            navMeshAgent.Warp(hit.position);
+        }
     }
     protected override Node SetupTree()
     {
@@ -28,12 +39,30 @@ public class MushroomEnemyAI : Tree
             new Sequence(new List<Node>
             {
                 new CheckPlayerInRange(transform, attackRange),
-                new TaskAttack(transform),
+                new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        new CheckAttackTimer(attackCoolTime),
+                        new Sequence(new List<Node>
+                        {
+                            new SetAnim(transform, "Attack"),
+                            new TaskAttack(transform, attackDamage),
+                        })
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new SetAnim(transform, "Idle"),
+                        new TaskWaitAttack(transform),
+                    }),
+                }),
+                
             }),
             new Sequence(new List<Node>
             {
                 new CheckPlayerInRange(transform, fovRange),
-                new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent),
+                new SetAnim(transform, "Run"),
+                new TaskGoToTarget(transform, runSpeed, navMeshAgent, attackRange),
             }),
             new TaskPatrol(transform, rigid, walkSpeed, navMeshAgent)
         });

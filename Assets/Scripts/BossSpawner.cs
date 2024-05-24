@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class BossSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] PassiveItem;
     [SerializeField]
     private GameObject[] dropItem;
     [SerializeField]
-    private GameObject[] Enemy;
+    private GameObject Enemy;
 
     [SerializeField]
     ParticleSystem spawnerParticle;
@@ -64,35 +64,36 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemyAfterDelay(int count, float delay)
     {
-        for (int i = 0; i < count; i++)
-        {
-            GameObject enemy = Enemy[Random.Range(0, Enemy.Length)];
-            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
-            Instantiate(enemy, spawnPos, Quaternion.identity);
-            
-            yield return new WaitForSeconds(delay);
-        }
+        Instantiate(Enemy, spawnPos, Quaternion.identity);
+        yield return new WaitForSeconds(delay);
     }
 
     private void CheckAllEnemiesDead()
     {
-        GameObject[] spawnEnemies = GameObject.FindGameObjectsWithTag("SpawnedEnemy");
-
-
-        if (spawnEnemies.Length == 0)
+        //GameObject[] spawnEnemies = GameObject.FindGameObjectsWithTag("SpawnedEnemy");
+        if (Enemy.GetComponent<EnemyManager>().enemyDead)
         {
             spawnerParticle.Stop();
             DropItem();
             Reward();
             Destroy(gameObject);
         }
+
+        //if (spawnEnemies.Length == 0)
+        //{
+        //    spawnerParticle.Stop();
+        //    DropItem();
+        //    Reward();
+        //    Destroy(gameObject);
+        //}
     }
 
     public void particleActive()
     {
         spawnerParticle.Play();
-        
+
     }
 
     private void DropItem()

@@ -6,17 +6,20 @@ using BehaviorTree;
 
 public class TaskBiteAttack : Node
 {
-    // Start is called before the first frame update
-    private Animator _animator;
+    private StatusUI _playerStatus;
+    private float _damage;
 
-    public TaskBiteAttack(Transform transform)
+    public TaskBiteAttack(Transform transform, float damage)
     {
-        _animator = transform.GetComponent<Animator>();
+        _playerStatus = Object.FindObjectOfType<StatusUI>();
+        _damage = damage;
     }
 
     public override NodeState Evaluate()
     {
         Debug.Log("BiteAttack");
+
+        _playerStatus.DecreaseHp(_damage);
 
         state = NodeState.RUNNING;
         return state;

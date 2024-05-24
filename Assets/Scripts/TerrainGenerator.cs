@@ -9,6 +9,7 @@ public class TerrainGenerator : MonoBehaviour
     public GameObject[] trashPrefabs;
     public GameObject[] npcPrefabs;
     public GameObject[] trashBagPrefabs;
+    public GameObject[] bossSpawnerPrefabs;
     public GameObject[] boxPrefabs;         // 디버그용 
 
     public int depth = 20;               // 맵 높이
@@ -28,6 +29,8 @@ public class TerrainGenerator : MonoBehaviour
 
     public float trashBagNoiseScale = 6f;
     public float trashBagDensity = 0.5f;
+
+    public int BossSpawnerCount = 3;
 
     public float offsetX = 100f;         // x좌표
     public float offsetY = 100f;         // z좌표
@@ -61,13 +64,9 @@ public class TerrainGenerator : MonoBehaviour
         GenerateTrash(terrain);
         GenerateNpc(terrain);
         GenerateTrashBag(terrain);
+        GenerateBossSpawner(terrain);
 
         BakeNavMesh();
-    }
-
-    void Update()
-    {
-
     }
 
     TerrainData GenerateTerrain(TerrainData terrainData)
@@ -244,10 +243,30 @@ public class TerrainGenerator : MonoBehaviour
                         GameObject trash = Instantiate(prefab);
                         trash.transform.position = new Vector3(x, trashBagheights, y);
                         trash.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-                        //trash.transform.localScale = Vector3.one * Random.Range(.8f, 1.2f);
                     }
-
                 }
+            }
+        }
+    }
+
+    void GenerateBossSpawner(Terrain terrain)
+    {
+        int _BossSpawnerCount = BossSpawnerCount;
+
+        while (_BossSpawnerCount > 0)
+        {
+            int x = Random.Range(100, width - 100);
+            int y = Random.Range(100, height - 100);
+
+            float terrainHeight = terrain.SampleHeight(new Vector3(x, 0, y));
+            if (terrainHeight > 10)
+            {
+                GameObject prefab = bossSpawnerPrefabs[Random.Range(0, bossSpawnerPrefabs.Length)];
+                GameObject spawner = Instantiate(prefab);
+                spawner.transform.position = new Vector3(x, terrainHeight, y);
+                spawner.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
+                Debug.Log("보스 스포너 생성");
+                _BossSpawnerCount--;
             }
         }
     }

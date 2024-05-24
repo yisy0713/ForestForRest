@@ -6,16 +6,20 @@ using BehaviorTree;
 
 public class TaskTailAttack : Node
 {
-    private Animator _animator;
+    private StatusUI _playerStatus;
+    private float _damage;
     
-    public TaskTailAttack(Transform transform)
+    public TaskTailAttack(Transform transform, float damage)
     {
-        _animator = transform.GetComponent<Animator>();
+        _playerStatus = Object.FindObjectOfType<StatusUI>();
+        _damage = damage;
     }
 
     public override NodeState Evaluate()
     {
         Debug.Log("TailAttack");
+
+        _playerStatus.DecreaseHp(_damage);
 
         state = NodeState.RUNNING;
         return state;

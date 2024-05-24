@@ -15,16 +15,13 @@ public class SetAnim : Node
     public SetAnim(Transform transform, string animParameter)
     {
         _transform = transform;
-        //_rigid = rigid;
         _animator = transform.GetComponent<Animator>();
         _animParameter = animParameter;
     }
 
     public override NodeState Evaluate()
     {
-
         //Debug.Log( "SetAnim : " + _animParameter);
-
         _animator.SetBool(_animParameter, true);
         _animator.SetTrigger(_animParameter);
 
@@ -35,12 +32,6 @@ public class SetAnim : Node
 
             _animator.SetBool(parameter.name, false);
         }
-
-        //Debug.Log("GoToTarget  " + _navMeshAgent.speed);
-
-        //_animator.SetBool("Walking", false);
-        //_animator.SetBool("Waiting", false);
-        //_animator.SetBool("Running", true);
 
         state = NodeState.SUCCESS;
         return state;

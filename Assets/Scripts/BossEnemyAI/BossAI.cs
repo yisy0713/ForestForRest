@@ -18,6 +18,9 @@ public class BossAI : Tree
     private float fleeFovRange = 80f;
     private float attackTimer = 3f;
 
+    public UnityEngine.GameObject poisionBall;
+    public UnityEngine.GameObject poisionFlame;
+
     public EnemyManager enemyManager;
 
     public NavMeshAgent navMeshAgent;
@@ -61,6 +64,15 @@ public class BossAI : Tree
                         new SetAnim(transform, "Idle"),
                         new Selector(new List<Node>
                         {
+                            new CheckPlayerInViewRange(transform),
+                            new Sequence(new List<Node>
+                            {
+                                new SetAnim(transform, "Walk"),
+                                new TaskLookPlayer(transform),
+                            }),
+                        }),
+                        new Selector(new List<Node>
+                        {
                             new Sequence(new List<Node>
                             {
                                 new CheckAttackTimer(attackTimer),
@@ -68,23 +80,23 @@ public class BossAI : Tree
                                 {
                                     new Sequence(new List<Node>
                                     {
-                                        new SetAnim(transform, "Fireball"),
-                                        new TaskTailAttack(transform)
+                                        new SetAnim(transform, "Tail"),
+                                        new TaskTailAttack(transform, 30)
+                                    }),
+                                    new Sequence(new List<Node>
+                                    {
+                                        new SetAnim(transform, "Scream"),
+                                        new TaskFlameAttack(transform, poisionFlame, 30)
                                     }),
                                     new Sequence(new List<Node>
                                     {
                                         new SetAnim(transform, "Fireball"),
-                                        new TaskFlameAttack(transform)
+                                        new TaskFireBallAttack(transform, poisionBall)
                                     }),
                                     new Sequence(new List<Node>
                                     {
-                                        new SetAnim(transform, "Fireball"),
-                                        new TaskFireBallAttack(transform)
-                                    }),
-                                    new Sequence(new List<Node>
-                                    {
-                                        new SetAnim(transform, "Fireball"),
-                                        new TaskBiteAttack(transform)
+                                        new SetAnim(transform, "Bite"),
+                                        new TaskBiteAttack(transform, 30)
                                     }),
                                 })
                             }),
@@ -101,13 +113,13 @@ public class BossAI : Tree
                         {
                             new CheckPlayerInRange(transform, nearFovRange),
                             new SetAnim(transform, "Run"),
-                            new TaskGoToTarget(transform, rigid, runSpeed, navMeshAgent),
+                            new TaskGoToTarget(transform, runSpeed, navMeshAgent, nearAttackRange),
                         }),
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
                             new SetAnim(transform, "Fly"),
-                            new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
+                            new TaskGoToTarget(transform, flySpeed, navMeshAgent, nearAttackRange)
                         }),
                         new TaskPatrol(transform, rigid, walkspeed, navMeshAgent)
                     })
@@ -145,7 +157,7 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
-                            new TaskGoToTarget(transform, rigid, flySpeed, navMeshAgent)
+                            new TaskGoToTarget(transform, flySpeed, navMeshAgent, nearAttackRange)
                         }),
                         // TaskHeal
                     }),
