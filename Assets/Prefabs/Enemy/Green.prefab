@@ -1473,7 +1473,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 2886182622534689623}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 2.2793846
   m_Height: 4.558769
   m_Direction: 1
@@ -1522,6 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHp: 100
   enemyDead: 0
+  isBoss: 1
   dropItem:
   - {fileID: 5006866413505838731, guid: 9445568bd00454a47a0ea1db2f1ea4d0, type: 3}
   - {fileID: 8903063735005763253, guid: b65f8524d27fb474daa670ac0fff68ad, type: 3}

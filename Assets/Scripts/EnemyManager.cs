@@ -11,11 +11,15 @@ public class EnemyManager : MonoBehaviour
 
     public bool enemyDead = false;
 
+    public bool isBoss = false;
+
     private Animator _animator;
     private Transform _transform;
 
     [SerializeField]
     private GameObject[] dropItem;
+
+    EnvironmentManager environmentManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +27,8 @@ public class EnemyManager : MonoBehaviour
         hp = curHp / maxHp;
         _animator = GetComponent<Animator>();
         _transform = GetComponent<Transform>();
+        environmentManager = FindObjectOfType<EnvironmentManager>();
+
     }
 
     // Update is called once per frame
@@ -78,6 +84,14 @@ public class EnemyManager : MonoBehaviour
             Vector3 dropPos = new Vector3(_transform.position.x, _transform.position.y + 1, _transform.position.z);//_transform.position;
 
             Instantiate(obj, dropPos, Quaternion.identity);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (isBoss)
+        {
+            environmentManager.CleanUp();
         }
     }
 }

@@ -23,6 +23,7 @@ public class TaskAttack : Node
     {
         Transform target = (Transform)GetData("target");
 
+
         _playerStatus.DecreaseHp(_damage);
 
         bool playerIsDead = _playerStatus.GetIsDead();
