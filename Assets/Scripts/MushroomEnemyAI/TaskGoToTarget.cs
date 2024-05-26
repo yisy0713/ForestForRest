@@ -25,7 +25,9 @@ public class TaskGoToTarget : Node
     {
         _navMeshAgent.speed = _speed;
 
-        if(_navMeshAgent.isStopped)
+        //Debug.Log("∞Ì≈ı≈∏∞Ÿ" + _speed);
+
+        if (_navMeshAgent.isStopped)
             _navMeshAgent.isStopped = false;
 
         Transform target = (Transform)GetData("target");

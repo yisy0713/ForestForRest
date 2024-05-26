@@ -127,13 +127,14 @@ public class BossAI : Tree
             }),
             new Sequence(new List<Node>
             {
-                new CheckHpEnough(transform, 20),
+                new CheckHpEnough(transform, 10),
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
                     {
-                        // CheckOnGround
-                        // TaskFlyTakeOff
+                        new CheckOnGround(transform),
+                        new SetAnim(transform, "Fly"),
+                        new TaskFlyTakeOff(transform),
                     }),
                     new Sequence(new List<Node>
                     {
@@ -142,13 +143,11 @@ public class BossAI : Tree
                         {
                             new Sequence(new List<Node>
                             {
-                                // CheckAttackTimer
-                                new RandomSelector(new List<Node>
-                                {
-                                    // TaskFireBallAttack
-                                    // TaskGlideAttack
-                                })
+                                new CheckAttackTimer(attackTimer),
+                                new SetAnim(transform, "Flyfireball"),
+                                new TaskFlyFireBallAttack(transform, poisionBall)
                             }),
+                            new SetAnim(transform, "Flying"),
                             new TaskWaitAttack(transform)
                         })
                     }),
@@ -157,9 +156,16 @@ public class BossAI : Tree
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
+                            new SetAnim(transform, "Flying"),
                             new TaskGoToTarget(transform, flySpeed, navMeshAgent, nearAttackRange)
                         }),
-                        // TaskHeal
+                        new Sequence(new List<Node>
+                        {
+                            new SetAnim(transform, "Sleep"),
+                            new TaskFlyLand(transform),
+                            new TaskHeal(transform)
+                        }),
+                        
                     }),
                 })
             }),

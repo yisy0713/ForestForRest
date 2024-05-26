@@ -26,7 +26,7 @@ public class StatusUI : MonoBehaviour
     // 배고픔 Hungry
     public float maxHungry = 100f;
     public float curHungry = 100f;
-    public float hungryDecreaseTime = 30;       // 배고픔 감소 쿨타임
+    public float hungryDecreaseTime = 20;       // 배고픔 감소 쿨타임
     public float curHungryDecreaseTime = 0;     // 배고픔 감소 타이머
     private bool imNotHungry = true;
 

@@ -94,12 +94,13 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
                 {
                     // 장착
                 }
-                else
+                else if (item.itemType == Item.ItemType.Used)
                 {
                     Debug.Log(item.itemName + "을 사용했습니다");
                     if(item.itemName == "Apple" || item.itemName == "Acorn")
                     {
-                        playerStatus.IncreaseHungry(10);
+                        playerStatus.IncreaseHungry(20);
+                        playerStatus.IncreaseHp(15);
                     }
                     SetSlotCount(-1);
                 }

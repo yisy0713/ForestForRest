@@ -41,6 +41,7 @@ public class TaskPatrol : Node
 
         if (_waiting)        // 기다리기
         {
+            _navMeshAgent.isStopped = true;
             _animator.SetBool("Idle", true);
 
             foreach (AnimatorControllerParameter parameter in _animator.parameters)
@@ -83,7 +84,7 @@ public class TaskPatrol : Node
             }
             else     // 걷기 
             {
-
+                _navMeshAgent.isStopped = false;
                 _animator.SetBool("Walk", true);
 
                 foreach (AnimatorControllerParameter parameter in _animator.parameters)

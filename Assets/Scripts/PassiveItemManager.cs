@@ -52,11 +52,11 @@ public class PassiveItemManager : MonoBehaviour
                         getPassiveItem = false;
                         break;
                     case "SweetPotato":
-                        _playerController.IncreaseJumpForce(1f);
+                        _playerController.IncreaseJumpForce(0.3f);
                         getPassiveItem = false;
                         break;
                     case "Banana":
-                        _playerController.IncreaseMoveSpeed(2f);
+                        _playerController.IncreaseMoveSpeed(1f);
                         getPassiveItem = false;
                         break;
                     case "Pea":

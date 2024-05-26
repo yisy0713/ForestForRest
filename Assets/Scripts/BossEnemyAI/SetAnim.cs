@@ -31,6 +31,11 @@ public class SetAnim : Node
                 continue;
 
             _animator.SetBool(parameter.name, false);
+
+            if (parameter.name == "Flyfireball")
+            {
+                _animator.SetBool("Fly", true);
+            }
         }
 
         state = NodeState.SUCCESS;

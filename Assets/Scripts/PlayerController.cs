@@ -176,13 +176,13 @@ public class PlayerController : MonoBehaviour
             runningStamina = 20;
         }
 
-        if (jumpingStamina - count >= 150f)
+        if (jumpingStamina - count >= 15f)
         {
             jumpingStamina -= count;
         }
         else
         {
-            jumpingStamina = 150f;
+            jumpingStamina = 15f;
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private float maxHp = 100f;
+    public float maxHp = 100f;
     public float curHp = 100f;
 
-    private float hp;
+    public float hp;
 
     public bool enemyDead = false;
 
@@ -28,7 +28,6 @@ public class EnemyManager : MonoBehaviour
         _animator = GetComponent<Animator>();
         _transform = GetComponent<Transform>();
         environmentManager = FindObjectOfType<EnvironmentManager>();
-
     }
 
     // Update is called once per frame
@@ -46,7 +45,15 @@ public class EnemyManager : MonoBehaviour
         if (curHp > 0)
         {
             curHp -= count;
-            _animator.SetTrigger("Hit");
+
+            if (isBoss && hp <= 50)
+            {
+            }
+            else
+            {
+                _animator.SetTrigger("Hit");
+            }
+            
             if (curHp <= 0)
             {
                 EnemyDead();
@@ -56,6 +63,18 @@ public class EnemyManager : MonoBehaviour
 
         hp = curHp / maxHp;
         Debug.Log("현재 적 체력 : " + hp);
+    }
+
+    public void EnemyIncreaseHp(float count)
+    {
+        curHp += count;
+        if (curHp > maxHp)
+        {
+            curHp = maxHp;
+        }
+
+        hp = curHp / maxHp;
+        //Debug.Log("현재 적 체력 : " + curHp);
     }
 
     private void EnemyDead()
