@@ -41,8 +41,6 @@ public class TaskPatrol : Node
 
         if (_waiting)        // 기다리기
         {
-            Debug.Log("Wait");
-
             _animator.SetBool("Idle", true);
 
             foreach (AnimatorControllerParameter parameter in _animator.parameters)
@@ -85,7 +83,6 @@ public class TaskPatrol : Node
             }
             else     // 걷기 
             {
-                Debug.Log("Walking");
 
                 _animator.SetBool("Walk", true);
 

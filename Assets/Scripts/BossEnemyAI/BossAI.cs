@@ -39,7 +39,7 @@ public class BossAI : Tree
             // 유효한 위치를 NavMeshAgent의 초기 위치로 설정
             transform.position = hit.position;
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            //.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
+            UnityEngine.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
             navMeshAgent.radius = 1f;
             navMeshAgent.height = 3f;
             navMeshAgent.Warp(hit.position);

@@ -11,6 +11,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public Item item;           // 획득한 아이템
     public int itemCount;       // 획득한 아이템 개수
     public Image itemImage;     // 아이템의 이미지
+    public int itemTotalCount;  // 총 획득한 아이템 개수
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -64,6 +65,11 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
         {
             ClearSlot();
         }
+    }
+
+    public void AddTotalItemCount(int _count)
+    {
+        itemTotalCount += _count;
     }
 
     // 슬롯 초기화

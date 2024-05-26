@@ -10,6 +10,9 @@ public class HandController : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
+    [SerializeField]
+    private Hand[] Weapons;
+
     private bool isAttack = false;
     private bool isSwing = false;
 
@@ -18,15 +21,48 @@ public class HandController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        WeaponManager.currentWeapon = currentHand.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentHand.anim;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            EquipWeapon(1);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            EquipWeapon(2);
+        }
+
+
         TryAttack();
 
         AnimationCntroller();
+    }
+
+    private void EquipWeapon(int _index)
+    {
+        if(currentHand == Weapons[_index])
+        {
+            EquipWeapon(0);
+        }
+        else
+        {
+            for (int i = 0; i < Weapons.Length; i++)
+            {
+                if (i == _index)
+                {
+                    Weapons[i].gameObject.SetActive(true);
+                    currentHand = Weapons[i];
+                    continue;
+                }
+
+                Weapons[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     private void TryAttack()
@@ -102,5 +138,20 @@ public class HandController : MonoBehaviour
             currentHand.anim.SetBool("Walking", false);
             currentHand.anim.SetBool("Running", false);
         }
+    }
+
+    public void HandChange(Hand _hand)
+    {
+        if(WeaponManager.currentWeapon != null)
+        {
+            WeaponManager.currentWeapon.gameObject.SetActive(false);
+        }
+
+        currentHand = _hand;
+        WeaponManager.currentWeapon = currentHand.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentHand.anim;
+
+        currentHand.transform.localPosition = Vector3.zero;
+        currentHand.gameObject.SetActive(true);
     }
 }

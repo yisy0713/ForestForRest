@@ -18,6 +18,7 @@ public class TaskGoToTarget : Node
         _speed = speed;
         _navMeshAgent = navMeshAgent;
         _stopDistance = stopDistance;
+        Debug.Log("TaskGoToTarget 생성자 호출, navMesh할당");
     }
 
     public override NodeState Evaluate()

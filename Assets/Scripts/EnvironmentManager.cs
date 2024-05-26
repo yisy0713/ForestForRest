@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnvironmentManager : MonoBehaviour
 {
@@ -17,10 +18,15 @@ public class EnvironmentManager : MonoBehaviour
     public Material skyMaterialPoison;
     public Material skyMaterialBlue;
 
+    private bool DoneEnvireonmentCleanUp;
+    public bool DoneCollectTrash;
+
     // Start is called before the first frame update
     void Start()
     {
         CleanUpLevel = 0;
+        DoneEnvireonmentCleanUp = false;
+        DoneCollectTrash = false;
 
         myTerrain.terrainData.terrainLayers[0].diffuseTexture = PoisonTexture;  // 오염된 땅 터레인레이어
         //myTerrain.terrainData.terrainLayers[2].diffuseTexture = texture2;
@@ -29,6 +35,14 @@ public class EnvironmentManager : MonoBehaviour
         RenderSettings.skybox = skyMaterialPoison;  // 오염된 하늘 스카이박스 
 
         water.GetComponent<MeshRenderer>().material = waterMaterialPoison; // 오염된 물 머테리얼
+    }
+
+    private void Update()
+    {
+        if(DoneEnvireonmentCleanUp && DoneCollectTrash)
+        {
+            SceneManager.LoadScene("ClearScene");
+        }
     }
 
     public void CleanUp()
@@ -46,6 +60,7 @@ public class EnvironmentManager : MonoBehaviour
             case 2:
                 CleanUpLevel++;
                 water.GetComponent<MeshRenderer>().material = waterMaterialBlue;
+                DoneEnvireonmentCleanUp = true;
                 break;
             default:
                 break;

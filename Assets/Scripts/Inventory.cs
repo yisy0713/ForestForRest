@@ -69,6 +69,7 @@ public class Inventory : MonoBehaviour
                     if (slots[i].item.itemName == _item.itemName)
                     {
                         slots[i].SetSlotCount(_count);
+                        slots[i].AddTotalItemCount(_count);
                         return;
                     }
                 }
@@ -80,6 +81,7 @@ public class Inventory : MonoBehaviour
             if (slots[i].item == null)
             {
                 slots[i].AddItem(_item, _count);
+                slots[i].AddTotalItemCount(_count);
                 return;
             }
         }
@@ -92,6 +94,18 @@ public class Inventory : MonoBehaviour
             if(slots[i].item == _item)
             {
                 return slots[i].itemCount;
+            }
+        }
+        return 0;
+    }
+
+    public int CountTotalItem(Item _item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == _item)
+            {
+                return slots[i].itemTotalCount;
             }
         }
         return 0;

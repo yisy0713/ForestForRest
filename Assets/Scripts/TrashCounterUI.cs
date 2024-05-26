@@ -9,28 +9,47 @@ public class TrashCounterUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI trashCountText;
     [SerializeField]
+    private TextMeshProUGUI trashTotalCountText;
+    [SerializeField]
     private Inventory theInventory;
+    [SerializeField]
+    private EnvironmentManager theEnvironment;
     [SerializeField]
     private Item trashItem;
 
-    public int trashCount;
+    public int GoalTrashCount;
+
+    public int currTrashCount;
+    public int totalTrashCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        trashCount = 0;
-        trashCountText.text = trashCount.ToString();
+        GoalTrashCount = 100;
+        currTrashCount = 0;
+        trashCountText.text = currTrashCount.ToString();
+        totalTrashCount = 0;
+        trashTotalCountText.text = currTrashCount.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         trashCounter();
+        totalTrashCounter();
+        if (totalTrashCount >= GoalTrashCount)
+            theEnvironment.DoneCollectTrash = true;
     }
 
     private void trashCounter()
     {
-        trashCount = theInventory.CountItem(trashItem);
-        trashCountText.text = trashCount.ToString();
+        currTrashCount = theInventory.CountItem(trashItem);
+        trashCountText.text = currTrashCount.ToString();
+    }
+
+    private void totalTrashCounter()
+    {
+        totalTrashCount = theInventory.CountTotalItem(trashItem);
+        trashTotalCountText.text = totalTrashCount.ToString() + "/" + GoalTrashCount;
     }
 }

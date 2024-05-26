@@ -282,5 +282,7 @@ public class TerrainGenerator : MonoBehaviour
         Debug.Log("BakedNavMesh");
     }
 
+
+
 }
 

@@ -11,6 +11,7 @@ namespace BehaviorTree
         protected void Start()
         {
             _root = SetupTree();
+            Debug.Log("트리셋업");
         }
 
         private void Update()
