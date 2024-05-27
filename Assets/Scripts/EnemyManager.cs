@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class EnemyManager : MonoBehaviour
     public bool enemyDead = false;
 
     public bool isBoss = false;
+
+    [SerializeField]
+    private Slider BossHPBar;
 
     private Animator _animator;
     private Transform _transform;
@@ -28,6 +32,15 @@ public class EnemyManager : MonoBehaviour
         _animator = GetComponent<Animator>();
         _transform = GetComponent<Transform>();
         environmentManager = FindObjectOfType<EnvironmentManager>();
+
+        if (isBoss)
+        {
+            maxHp = 300f;
+            curHp = 300f;
+            BossHPBar.value = hp;
+            BossHPBar.gameObject.SetActive(false);
+        }
+        
     }
 
     // Update is called once per frame
@@ -38,6 +51,11 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(DisableObjectAfterDelay(2f));
         }
 
+        if (isBoss)
+        {
+            hp = curHp / maxHp;
+            BossHPBar.value = Mathf.Lerp(BossHPBar.value, hp, Time.deltaTime * 10);
+        }
     }
 
     public void EnemyDecreaseHp(float count)
@@ -45,6 +63,11 @@ public class EnemyManager : MonoBehaviour
         if (curHp > 0)
         {
             curHp -= count;
+
+            if (isBoss)
+            {
+                BossHPBar.gameObject.SetActive(true);
+            }
 
             if (isBoss && hp <= 50)
             {
@@ -80,6 +103,11 @@ public class EnemyManager : MonoBehaviour
     private void EnemyDead()
     {
         _animator.SetTrigger("Dead");
+
+        if (isBoss)
+        {
+            BossHPBar.gameObject.SetActive(false);
+        }
 
         //Instantiate(dropItem[0], _transform.position, Quaternion.identity);
         //_animator.SetBool("isDead", true);

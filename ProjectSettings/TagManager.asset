@@ -12,6 +12,7 @@ TagManager:
   - EnemySpawn
   - SpawnedEnemy
   - Hill
+  - BossHPBar
   layers:
   - Default
   - TransparentFX
