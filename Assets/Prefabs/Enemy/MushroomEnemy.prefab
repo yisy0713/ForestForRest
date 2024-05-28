@@ -316,7 +316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &873083717701280710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 4067133468175658878}
   enemyManager: {fileID: 1130256885740540633}
+  mainCamera: {fileID: 0}
 --- !u!1 &1988349274223848329
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +510,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
@@ -809,8 +810,8 @@ RectTransform:
   m_Father: {fileID: 5995811696670950553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -990,6 +991,7 @@ MonoBehaviour:
   hp: 0
   enemyDead: 0
   isBoss: 0
+  BossHPBar: {fileID: 0}
   dropItem:
   - {fileID: 3217363504783118538, guid: bf6cf5a04562f20498632eadde48c856, type: 3}
   - {fileID: 5006866413505838731, guid: 9445568bd00454a47a0ea1db2f1ea4d0, type: 3}

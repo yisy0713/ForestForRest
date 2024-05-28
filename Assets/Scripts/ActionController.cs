@@ -8,19 +8,19 @@ public class ActionController : MonoBehaviour
     [SerializeField]
     private float range;        // 획득 가능한 최대 거리
 
-    private bool pickupActivated = false;           // 아이템 획득 가능할 시 true
-    private bool dealActivated = false;             // npc와 상호작용 가능할 시 true
+    private bool pickupActivated = false;
+    private bool dealActivated = false;
     private bool spawnActivated = false;
 
-    private RaycastHit hitInfo;                     // 충돌체 정보 저장
+    private RaycastHit hitInfo;
 
     // 필요한 컴포넌트
     [SerializeField]
-    private LayerMask ItemLayerMask;                // Item 레이어에만 반응하도록 레이어 마스크를 설정
+    private LayerMask ItemLayerMask;               
     [SerializeField]
-    private LayerMask NpcLayerMask;                 // Npc 레이어에만 반응하도록 레이어 마스크를 설정
+    private LayerMask NpcLayerMask;
     [SerializeField]
-    private LayerMask EnemySpawnLayerMask;                 // Npc 레이어에만 반응하도록 레이어 마스크를 설정
+    private LayerMask EnemySpawnLayerMask;
     [SerializeField]
     private Text actionText;
     [SerializeField]

@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour
             maxHp = 300f;
             curHp = 300f;
             BossHPBar.value = hp;
-            BossHPBar.gameObject.SetActive(false);
+            //BossHPBar.gameObject.SetActive(false);
         }
         
     }
@@ -51,11 +51,11 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(DisableObjectAfterDelay(2f));
         }
 
-        if (isBoss)
-        {
-            hp = curHp / maxHp;
-            BossHPBar.value = Mathf.Lerp(BossHPBar.value, hp, Time.deltaTime * 10);
-        }
+        //if (isBoss)
+        //{
+        //    hp = curHp / maxHp;
+        //    BossHPBar.value = Mathf.Lerp(BossHPBar.value, hp, Time.deltaTime * 10);
+        //}
     }
 
     public void EnemyDecreaseHp(float count)
@@ -64,27 +64,20 @@ public class EnemyManager : MonoBehaviour
         {
             curHp -= count;
 
-            if (isBoss)
-            {
-                BossHPBar.gameObject.SetActive(true);
-            }
-
-            if (isBoss && hp <= 50)
-            {
-            }
-            else
+            if (!isBoss)
             {
                 _animator.SetTrigger("Hit");
             }
-            
+                
             if (curHp <= 0)
             {
                 EnemyDead();
                 enemyDead = true;
             }
         }
-
+        
         hp = curHp / maxHp;
+        EnemyHpBar.Instance.UpdateEnemyHP(this);
         Debug.Log("현재 적 체력 : " + hp);
     }
 
@@ -106,11 +99,10 @@ public class EnemyManager : MonoBehaviour
 
         if (isBoss)
         {
-            BossHPBar.gameObject.SetActive(false);
+            //BossHPBar.gameObject.SetActive(false);
         }
 
         //Instantiate(dropItem[0], _transform.position, Quaternion.identity);
-        //_animator.SetBool("isDead", true);
     }
 
     IEnumerator DisableObjectAfterDelay(float delay)
@@ -136,6 +128,7 @@ public class EnemyManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        EnemyHpBar.Instance.HideHPUI();
         if (isBoss)
         {
             environmentManager.CleanUp();

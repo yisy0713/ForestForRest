@@ -64,7 +64,7 @@ public class PassiveItemManager : MonoBehaviour
                         getPassiveItem = false;
                         break;
                     case "Grape":
-                        //_playerStatus.IncreaseHpRecover(10f);
+                        _playerController.IncreaseJumpCount(1);
                         getPassiveItem = false;
                         break;
                     case "Garlic":

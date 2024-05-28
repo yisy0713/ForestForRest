@@ -4,37 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // 스피드 조정 변수
+    public int jumpCount = 1;
+    public int CurrJumpCount = 0;
+
     public float walkSpeed = 9f;
     public float runSpeed = 15f;
-    private float applySpeed;       // walkSpeed 또는 runSpeed를 대입
+    private float applySpeed;       // walkSpeed나 runSpeed 적용
 
     private float jumpForce = 5f;
 
     public float runningStamina = 0.2f;
     public float jumpingStamina = 30f;
 
-    // 상태 변수
     public bool isStop = true;
     public bool isRun = false;
     bool isGround = true;
 
-    // 땅 착지 여부
     private CapsuleCollider capsuleCollider;
 
-    // 민감도
     public float lookSensitivity;
 
-    // 카메라 한계
     public float cameraRotationLimit;
     private float currentCameraRotationX = 0f;
 
-    // 필요한 컴포넌트
     public Camera theCamera;
     private Rigidbody myRigid;
     private StatusUI statusController;
 
-    // Start is called before the first frame update
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -43,7 +39,6 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!PlayerIsDead())
@@ -75,26 +70,29 @@ public class PlayerController : MonoBehaviour
         return statusController.GetIsDead();
     }
 
-    private void Jump()
-    {
-        myRigid.velocity = transform.up * jumpForce;
-        statusController.DecreaseJumpStamina(jumpingStamina);
-    }
-
     private void IsGround()
     {
+        bool wasGround = isGround;
         isGround = Physics.Raycast(transform.position, -transform.up, capsuleCollider.bounds.extents.y + 0.1f);
-        
-        /*if(isGround)
-            Debug.Log("isGround!");*/
+
+        if (isGround && !wasGround)
+        {
+            CurrJumpCount = 0;
+        }
     }
 
     private void TryJump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isGround && statusController.GetCurSp() > 0)
+        if(Input.GetKeyDown(KeyCode.Space) /*&& isGround*/ && statusController.GetCurSp() > 0 && (CurrJumpCount < jumpCount))
         {
             Jump();
+            CurrJumpCount ++;
         }
+    }
+    private void Jump()
+    {
+        myRigid.velocity = transform.up * jumpForce;
+        statusController.DecreaseJumpStamina(jumpingStamina);
     }
 
     private void TryRun()
@@ -184,5 +182,10 @@ public class PlayerController : MonoBehaviour
         {
             jumpingStamina = 15f;
         }
+    }
+
+    public void IncreaseJumpCount(int count = 1)
+    {
+        jumpCount = jumpCount + count;
     }
 }
