@@ -10,14 +10,12 @@ public class TaskGoToTarget : Node
     private Transform _transform;
     private float _speed;
     private NavMeshAgent _navMeshAgent;
-    private float _stopDistance;
 
-    public TaskGoToTarget(Transform transform, float speed, NavMeshAgent navMeshAgent, float stopDistance)
+    public TaskGoToTarget(Transform transform, float speed, NavMeshAgent navMeshAgent)
     {
         _transform = transform;
         _speed = speed;
         _navMeshAgent = navMeshAgent;
-        _stopDistance = stopDistance;
         Debug.Log("TaskGoToTarget 생성자 호출, navMesh할당");
     }
 
@@ -36,9 +34,6 @@ public class TaskGoToTarget : Node
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
         {
             _navMeshAgent.SetDestination(target.position);
-
-            if (Vector3.Distance(_transform.position, target.position) < _stopDistance - 0.2f)
-                _navMeshAgent.isStopped = true;
         }
 
         state = NodeState.RUNNING;

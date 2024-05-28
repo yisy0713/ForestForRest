@@ -5,8 +5,6 @@ using UnityEngine;
 using BehaviorTree;
 public class CheckPlayerInAttactRange : Node
 {
-    private static int _playerLayerMask = 1 << 8;
-
     private Transform _transform;
     private Animator _animator;
 

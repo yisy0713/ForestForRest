@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &36782552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10659,7 +10659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc024a4d63c5b846b28ca7ada8c2d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
+  walkSpeed: 20
   runSpeed: 6
   runningStamina: 30
   jumpingStamina: 30

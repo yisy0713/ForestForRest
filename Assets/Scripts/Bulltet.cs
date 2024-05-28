@@ -40,9 +40,11 @@ public class Bulltet : MonoBehaviour
             playerStatus.DecreaseHp(damage);
             Destroy(gameObject);
         }
-        else if (other.gameObject.CompareTag("Hill"))
+
+        if (!other.gameObject.CompareTag("SpawnedEnemy"))
         {
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 0.2f);
         }
+        
     }
 }

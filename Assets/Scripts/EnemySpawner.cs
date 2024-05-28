@@ -67,7 +67,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             GameObject enemy = Enemy[Random.Range(0, Enemy.Length)];
-            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
 
             Instantiate(enemy, spawnPos, Quaternion.identity);
             

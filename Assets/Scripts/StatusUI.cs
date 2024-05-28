@@ -90,17 +90,17 @@ public class StatusUI : MonoBehaviour
     public void DecreaseHp(float count)               // 체력 감소 함수
     {
 
-        if (curHp > 0)
+        if (curHp - count > 0)
         {
             curHp -= count;
+            hp = curHp / maxHp;
         }
         else
         {
+            curHp = 0;
+            hp = curHp / maxHp;
             isDead = true;
         }
-
-        hp = curHp / maxHp;
-
     }
 
     private void HpRechargeTime()                  // 체력 회복 쿨타임 관리

@@ -8,9 +8,6 @@ public class TaskAttack : Node
 {
     private StatusUI _playerStatus;
 
-    private float _attackTime = 1f;
-    private float _attackCounter = 1f;
-
     private float _damage;
 
     public TaskAttack(Transform transform, float damage)

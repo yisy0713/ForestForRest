@@ -55,16 +55,16 @@ public class BossAI : Tree
 
             new Sequence(new List<Node>
             {
-                new CheckHpEnough(transform, 50),
+                new CheckHpEnough(transform, 200),
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
                     {
-                        new CheckPlayerInRange(transform, nearAttackRange),
+                        new CheckPlayerInRange(transform, nearAttackRange , true),
                         new SetAnim(transform, "Idle"),
                         new Selector(new List<Node>
                         {
-                            new CheckPlayerInViewRange(transform),
+                            new CheckPlayerInViewRange(transform, 10f),
                             new Sequence(new List<Node>
                             {
                                 new SetAnim(transform, "Walk"),
@@ -113,13 +113,13 @@ public class BossAI : Tree
                         {
                             new CheckPlayerInRange(transform, nearFovRange),
                             new SetAnim(transform, "Run"),
-                            new TaskGoToTarget(transform, runSpeed, navMeshAgent, nearAttackRange),
+                            new TaskGoToTarget(transform, runSpeed, navMeshAgent),
                         }),
                         new Sequence(new List<Node>
                         {
                             new CheckPlayerInRange(transform, farFovRange),
                             new SetAnim(transform, "Fly"),
-                            new TaskGoToTarget(transform, flySpeed, navMeshAgent, nearAttackRange)
+                            new TaskGoToTarget(transform, flySpeed, navMeshAgent)
                         }),
                         new TaskPatrol(transform, rigid, walkspeed, navMeshAgent)
                     })
@@ -127,18 +127,22 @@ public class BossAI : Tree
             }),
             new Sequence(new List<Node>
             {
-                new CheckHpEnough(transform, 10),
+                new CheckHpEnough(transform,100),
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
                     {
                         new CheckOnGround(transform),
-                        new SetAnim(transform, "Fly"),
-                        new TaskFlyTakeOff(transform),
+                        new Sequence(new List<Node>
+                        {
+                            new SetAnim(transform, "Fly"),
+                            new TaskFlyTakeOff(transform),
+                        }),
+                        
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckPlayerInRange(transform, farAttackRange),
+                        new CheckPlayerInRange(transform, farAttackRange, true),
                         new Selector(new List<Node>
                         {
                             new Sequence(new List<Node>
@@ -157,7 +161,7 @@ public class BossAI : Tree
                         {
                             new CheckPlayerInRange(transform, farFovRange),
                             new SetAnim(transform, "Flying"),
-                            new TaskGoToTarget(transform, flySpeed, navMeshAgent, nearAttackRange)
+                            new TaskGoToTarget(transform, flySpeed, navMeshAgent)
                         }),
                         new Sequence(new List<Node>
                         {

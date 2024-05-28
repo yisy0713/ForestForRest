@@ -38,7 +38,16 @@ public class MushroomEnemyAI : Tree
             new CheckAmIDead(transform),
             new Sequence(new List<Node>
             {
-                new CheckPlayerInRange(transform, attackRange),
+                new CheckPlayerInRange(transform, attackRange, true),
+                new Selector(new List<Node>
+                {
+                    new CheckPlayerInViewRange(transform, 5f),
+                    new Sequence(new List<Node>
+                    {
+                        new SetAnim(transform, "Walk"),
+                        new TaskLookPlayer(transform)
+                    })
+                }),
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
@@ -62,7 +71,7 @@ public class MushroomEnemyAI : Tree
             {
                 new CheckPlayerInRange(transform, fovRange),
                 new SetAnim(transform, "Run"),
-                new TaskGoToTarget(transform, runSpeed, navMeshAgent, attackRange),
+                new TaskGoToTarget(transform, runSpeed, navMeshAgent),
             }),
             new TaskPatrol(transform, rigid, walkSpeed, navMeshAgent)
         });
