@@ -14,6 +14,8 @@ public class PassiveItemManager : MonoBehaviour
     private StatusUI _playerStatus;
     [SerializeField]
     private Hand _handController;
+    [SerializeField]
+    private PassiveItemListUI passiveList;
 
     private bool getPassiveItem = false;
 
@@ -32,59 +34,55 @@ public class PassiveItemManager : MonoBehaviour
 
     private void PassiveItemPowerUp(PassiveItem _passiveItem)
     {
-        if (getPassiveItem)
+        passiveList.AcquireItem(_passiveItem);
+
+        switch (_passiveItem.PassiveItemName)
         {
-            foreach (var pair in getPassiveItems)
-            {
-                switch (_passiveItem.PassiveItemName)
-                {
-                    case "Cherry":
-                        //Debug.Log("Ã¼¸® ¸Ô¾ú¾î?");
-                        _playerStatus.IncreaseMaxHp(10f);
-                        getPassiveItem = false;
-                        break;
-                    case "Carrot":
-                        _playerStatus.IncreaseHpRecover(5f);
-                        getPassiveItem = false;
-                        break;
-                    case "Orange":
-                        _playerStatus.IncreaseHungerDecreaseDelay(20f);
-                        getPassiveItem = false;
-                        break;
-                    case "SweetPotato":
-                        _playerController.IncreaseJumpForce(0.3f);
-                        getPassiveItem = false;
-                        break;
-                    case "Banana":
-                        _playerController.IncreaseMoveSpeed(1f);
-                        getPassiveItem = false;
-                        break;
-                    case "Pea":
-                        _playerController.DecreaseStemiaUse(3f);
-                        getPassiveItem = false;
-                        break;
-                    case "Grape":
-                        _playerController.IncreaseJumpCount(1);
-                        getPassiveItem = false;
-                        break;
-                    case "Garlic":
-                        //_playerStatus.IncreaseHpRecover(10f);
-                        getPassiveItem = false;
-                        break;
-                    case "Lemon":
-                        _playerStatus.IncreaseSpRecover(3f);
-                        getPassiveItem = false;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            case "Cherry":
+                //Debug.Log("Ã¼¸® ¸Ô¾ú¾î?");
+                _playerStatus.IncreaseMaxHp(10f);
+                //getPassiveItem = false;
+                break;
+            case "Carrot":
+                _playerStatus.IncreaseHpRecover(5f);
+                //getPassiveItem = false;
+                break;
+            case "Orange":
+                _playerStatus.IncreaseHungerDecreaseDelay(20f);
+                //getPassiveItem = false;
+                break;
+            case "SweetPotato":
+                _playerController.IncreaseJumpForce(1f);
+                //getPassiveItem = false;
+                break;
+            case "Banana":
+                _playerController.IncreaseMoveSpeed(2f);
+                //getPassiveItem = false;
+                break;
+            case "Pea":
+                _playerController.DecreaseStemiaUse(3f);
+                //getPassiveItem = false;
+                break;
+            case "Grape":
+                _playerController.IncreaseJumpCount(1);
+                //getPassiveItem = false;
+                break;
+            case "Garlic":
+                //_playerStatus.IncreaseHpRecover(10f);
+                //getPassiveItem = false;
+                break;
+            case "Lemon":
+                _playerStatus.IncreaseSpRecover(3f);
+                //getPassiveItem = false;
+                break;
+            default:
+                break;
         }
     }
 
     public void AddPassiveItem(PassiveItem _passiveItem)
     {
-        getPassiveItem = true;
+        //getPassiveItem = true;
         if (getPassiveItems.ContainsKey(_passiveItem))
         {
             getPassiveItems[_passiveItem]++;
@@ -93,7 +91,6 @@ public class PassiveItemManager : MonoBehaviour
         {
             getPassiveItems.Add(_passiveItem, 1);
         }
-
 
         foreach (var pair in getPassiveItems)
         {

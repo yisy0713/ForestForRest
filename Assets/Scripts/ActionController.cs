@@ -14,7 +14,6 @@ public class ActionController : MonoBehaviour
 
     private RaycastHit hitInfo;
 
-    // 필요한 컴포넌트
     [SerializeField]
     private LayerMask ItemLayerMask;               
     [SerializeField]

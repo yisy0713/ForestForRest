@@ -8,7 +8,7 @@ public class PassiveItem : ScriptableObject
     public string PassiveItemName;
     //public int PassiveId;
     //public ItemType itemType;
-    ///////////public Sprite itemImage;
+    public Sprite itemImage;
     public GameObject itemPrefab;
 
     //public string weaponType;

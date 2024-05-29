@@ -25,7 +25,6 @@ public class PassiveItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             passiveItemManager.AddPassiveItem(passiveItem);
-
             Destroy(gameObject);
         }
     }

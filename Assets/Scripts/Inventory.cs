@@ -8,13 +8,11 @@ public class Inventory : MonoBehaviour
 
     private Animator animator;
 
-    // 필요한 컴포넌트
     [SerializeField]
     private GameObject go_inventoryBase;
     [SerializeField]
     private GameObject go_SloatsParent;
 
-    // 슬롯들
     private SlotUI[] slots;
 
     // Start is called before the first frame update

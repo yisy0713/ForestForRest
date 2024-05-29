@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
     public float walkSpeed = 9f;
     public float runSpeed = 15f;
+    public float swimSpeed = 2f;
+    public float swimFastSpeed = 5f;
+    public float upSwimSpeed = 5f;
     private float applySpeed;       // walkSpeed나 runSpeed 적용
 
     private float jumpForce = 5f;
@@ -19,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public bool isStop = true;
     public bool isRun = false;
     bool isGround = true;
+    public bool isWater = false;
 
     private CapsuleCollider capsuleCollider;
 
@@ -43,9 +48,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerIsDead())
         {
+            WaterCheck();
             IsGround();
             TryJump();
-            TryRun();       // 뛰는지 확인 (무조건 Move()함수 위에 위치해야함)
+            if (!isWater)
+            {
+                TryRun();       // 뛰는지 확인 (무조건 Move()함수 위에 위치해야함)
+            }
             Move();
 
             if (!Inventory.inventoryActivated && !Map.MapActivated)
@@ -70,6 +79,24 @@ public class PlayerController : MonoBehaviour
         return statusController.GetIsDead();
     }
 
+    private void WaterCheck()
+    {
+        if (isWater)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                applySpeed = swimFastSpeed;
+            else
+                applySpeed = swimSpeed;
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                applySpeed = runSpeed;
+            else
+                applySpeed = walkSpeed;
+        }
+    }
+
     private void IsGround()
     {
         bool wasGround = isGround;
@@ -83,12 +110,23 @@ public class PlayerController : MonoBehaviour
 
     private void TryJump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) /*&& isGround*/ && statusController.GetCurSp() > 0 && (CurrJumpCount < jumpCount))
+        if(Input.GetKeyDown(KeyCode.Space) && !isWater && statusController.GetCurSp() > 0 && (CurrJumpCount < jumpCount))
         {
             Jump();
             CurrJumpCount ++;
         }
+        else if(Input.GetKey(KeyCode.Space) && isWater && statusController.GetCurSp() > 0)
+        {
+            UpSwim();
+        }
     }
+
+    private void UpSwim()
+    {
+        myRigid.velocity = transform.up * upSwimSpeed;
+        statusController.DecreaseJumpStamina(jumpingStamina);
+    }
+
     private void Jump()
     {
         myRigid.velocity = transform.up * jumpForce;
@@ -150,6 +188,22 @@ public class PlayerController : MonoBehaviour
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("WATER"))
+        {
+            isWater = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("WATER"))
+        {
+            isWater = false;
+        }
+    }
+
     // 패시브 아이템 관련 함수
 
     public void IncreaseJumpForce(float count)
@@ -161,6 +215,8 @@ public class PlayerController : MonoBehaviour
     {
         walkSpeed += count * 0.5f;
         runSpeed += count;
+        swimSpeed += count * 0.5f;
+        swimFastSpeed += count;
     }
 
     public void DecreaseStemiaUse(float count)
@@ -188,4 +244,5 @@ public class PlayerController : MonoBehaviour
     {
         jumpCount = jumpCount + count;
     }
+
 }
