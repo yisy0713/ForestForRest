@@ -31,12 +31,10 @@ public class BossAI : Tree
     {
         animator = GetComponent<UnityEngine.Animator>();
 
-        // NavMesh 상의 유효한 위치 찾기
         UnityEngine.Vector3 position = transform.position;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(position, out hit, UnityEngine.Mathf.Infinity, NavMesh.AllAreas))
         {
-            // 유효한 위치를 NavMeshAgent의 초기 위치로 설정
             transform.position = hit.position;
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             UnityEngine.Debug.Log("Add 네비메쉬에이전트! (BOSSAI Awake함수!)");
@@ -178,9 +176,18 @@ public class BossAI : Tree
                 new Sequence(new List<Node>
                 {
                     new CheckPlayerInRange(transform,fleeFovRange),
-                    // TaskFlee
+                    new Sequence(new List<Node>
+                    {
+                        new SetAnim(transform, "Flying"),
+                        new TaskFlee(transform, walkspeed, navMeshAgent)
+                    }),
                 }),
-                // TaskHeal
+                new Sequence(new List<Node>
+                {
+                    new SetAnim(transform, "Sleep"),
+                    new TaskFlyLand(transform),
+                    new TaskHeal(transform)
+                })
             })
         });
 

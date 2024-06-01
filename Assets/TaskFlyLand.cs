@@ -19,7 +19,7 @@ public class TaskFlyLand : Node
     {
         _boxCollider.center = new Vector3(0, 1.7f, 0);
 
-        state = NodeState.FAILURE;
+        state = NodeState.SUCCESS;
         return state;
     }
 }

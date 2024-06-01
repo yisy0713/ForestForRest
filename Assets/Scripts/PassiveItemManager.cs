@@ -68,7 +68,7 @@ public class PassiveItemManager : MonoBehaviour
                 //getPassiveItem = false;
                 break;
             case "Garlic":
-                //_playerStatus.IncreaseHpRecover(10f);
+                _playerController.IncreaseAttackDamage(0.5f);
                 //getPassiveItem = false;
                 break;
             case "Lemon":

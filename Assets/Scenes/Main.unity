@@ -581,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &36782552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   timer: {fileID: 300671725}
   dayCounter: {fileID: 1289577986}
   monsterPrefab: {fileID: 5909996899801010709, guid: e01714be71731d343b34073cf4b19133, type: 3}
-  spawnRadius: 20
+  spawnRadius: 5
   spawnInterval: 10
   player: {fileID: 3142240412883911504}
   secondPerRealTimeSecond: 20
@@ -2299,7 +2299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!154 &336249276
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -4303,6 +4303,52 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &657751370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657751372}
+  - component: {fileID: 657751371}
+  m_Layer: 0
+  m_Name: EnemyPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &657751371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657751370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f439e1bf2c69f4d8e4eb461aac11eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 5909996899801010709, guid: e01714be71731d343b34073cf4b19133, type: 3}
+  initialSize: 10
+--- !u!4 &657751372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657751370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 500, y: 15, z: 500}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658698091
 GameObject:
   m_ObjectHideFlags: 0
@@ -11986,9 +12032,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc024a4d63c5b846b28ca7ada8c2d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
   jumpCount: 1
   CurrJumpCount: 0
-  walkSpeed: 20
+  walkSpeed: 4
   runSpeed: 6
   swimSpeed: 2
   swimFastSpeed: 5
@@ -12001,6 +12048,7 @@ MonoBehaviour:
   lookSensitivity: 4
   cameraRotationLimit: 80
   theCamera: {fileID: 52473558}
+  terrain: {fileID: 336249277}
 --- !u!33 &6476421138888443493
 MeshFilter:
   m_ObjectHideFlags: 0

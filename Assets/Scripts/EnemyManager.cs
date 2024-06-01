@@ -25,27 +25,23 @@ public class EnemyManager : MonoBehaviour
 
     EnvironmentManager environmentManager;
 
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
-        hp = curHp / maxHp;
-        _animator = GetComponent<Animator>();
-        _transform = GetComponent<Transform>();
-        environmentManager = FindObjectOfType<EnvironmentManager>();
-
-        if (isBoss)
-        {
-            maxHp = 300f;
-            curHp = 300f;
-            BossHPBar.value = hp;
-            //BossHPBar.gameObject.SetActive(false);
-        }
-        
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Vector3.Distance(_transform.position, player.transform.position) >= 200 && this.tag == "Enemy")
+        {
+            ObjectPool.Instance.ReturnObject(this.gameObject);
+        }
+
+
         if (enemyDead)
         {
             StartCoroutine(DisableObjectAfterDelay(2f));
@@ -56,6 +52,35 @@ public class EnemyManager : MonoBehaviour
         //    hp = curHp / maxHp;
         //    BossHPBar.value = Mathf.Lerp(BossHPBar.value, hp, Time.deltaTime * 10);
         //}
+    }
+    public void Initialize()
+    {
+        curHp = maxHp;
+        hp = curHp / maxHp;
+        enemyDead = false;
+
+        if (isBoss)
+        {
+            maxHp = 300f;
+            curHp = 300f;
+            BossHPBar.value = hp;
+        }
+
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+
+        _animator.ResetTrigger("Dead");
+        _animator.ResetTrigger("Hit");
+
+        if (_transform == null)
+        {
+            _transform = GetComponent<Transform>();
+        }
+
+        environmentManager = FindObjectOfType<EnvironmentManager>();
+        player = FindObjectOfType<PlayerController>().gameObject;
     }
 
     public void EnemyDecreaseHp(float count)
@@ -83,6 +108,7 @@ public class EnemyManager : MonoBehaviour
 
     public void EnemyIncreaseHp(float count)
     {
+        Debug.Log("Èú!!");
         curHp += count;
         if (curHp > maxHp)
         {
@@ -111,7 +137,16 @@ public class EnemyManager : MonoBehaviour
 
         DropItem();
 
-        Destroy(gameObject);
+        if(this.tag == "Enemy")
+        {
+            ObjectPool.Instance.ReturnObject(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        //Destroy(gameObject);
     }
 
     private void DropItem()

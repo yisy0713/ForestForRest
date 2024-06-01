@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float attackDamage = 0f;
+
     public int jumpCount = 1;
     public int CurrJumpCount = 0;
 
@@ -36,12 +38,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigid;
     private StatusUI statusController;
 
+    [SerializeField]
+    private Terrain terrain;
+
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
         statusController = FindObjectOfType<StatusUI>();
         applySpeed = walkSpeed;
+
+        float terrainheights = terrain.SampleHeight(new Vector3(500, 0, 500));
+        transform.position = new Vector3(500, terrainheights, 500);
     }
 
     void Update()
@@ -243,6 +251,11 @@ public class PlayerController : MonoBehaviour
     public void IncreaseJumpCount(int count = 1)
     {
         jumpCount = jumpCount + count;
+    }
+
+    public void IncreaseAttackDamage(float count = 0.5f)
+    {
+        attackDamage = attackDamage + count;
     }
 
 }

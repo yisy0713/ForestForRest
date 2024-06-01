@@ -7,6 +7,8 @@ public class HandController : MonoBehaviour
     [SerializeField]
     private Hand currentHand;
 
+    private PlayerController player;
+
     [SerializeField]
     private PlayerController playerController;
 
@@ -23,7 +25,10 @@ public class HandController : MonoBehaviour
     {
         WeaponManager.currentWeapon = currentHand.GetComponent<Transform>();
         WeaponManager.currentWeaponAnim = currentHand.anim;
+
+        player = FindObjectOfType<PlayerController>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -103,7 +108,7 @@ public class HandController : MonoBehaviour
                 Debug.Log(hitInfo.transform.name);
                 if (hitInfo.transform.CompareTag("Enemy") || hitInfo.transform.CompareTag("SpawnedEnemy"))
                 {
-                    hitInfo.transform.GetComponent<EnemyManager>().EnemyDecreaseHp(currentHand.damage);
+                    hitInfo.transform.GetComponent<EnemyManager>().EnemyDecreaseHp(currentHand.damage + player.attackDamage);             // 데미지 부분
                 }
             }
             yield return null;

@@ -34,12 +34,8 @@ public class TimeManager : MonoBehaviour
     private float spawnInterval = 3f;       // 몬스터 스폰 시간 간격
     private float EnemySpawnTimer = 0f;     // 몬스터 스폰 타이머
     
-
-
     [SerializeField]
     private Transform player;
-
-    
 
     [SerializeField]
     private float secondPerRealTimeSecond = 100;
@@ -75,15 +71,15 @@ public class TimeManager : MonoBehaviour
             isNight = false;
         }
 
-        if (isNight)    // 밤 일때
+        if (isNight)    // 밤일때
         {
             checkedDayCount = true;
 
             SpawnMonsters();
         }
-        else            // 낮 일때
+        else            // 낮일때
         {
-            if (checkedDayCount)    // 낮이 되면 생존 일수 업데이트
+            if (checkedDayCount)    // 낮이 되면 생존 일수+1
             {
                 currentDayCount++;
                 checkedDayCount = false;
@@ -120,12 +116,13 @@ public class TimeManager : MonoBehaviour
 
     void SpawnMonsters()
     {
-        if(EnemySpawnTimer >= spawnInterval)
+        if (EnemySpawnTimer >= spawnInterval)
         {
             Vector3 spawnOffset = Random.insideUnitSphere * spawnRadius;
             Vector3 spawnPosition = player.position + spawnOffset;
             spawnPosition.y = player.position.y + 5;
-            Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
+
+            ObjectPool.Instance.GetObject(spawnPosition);
             EnemySpawnTimer = 0f;
         }
         else
